@@ -85,6 +85,9 @@ hibiscus/themes          theme+                      hibiscus/layout
 headsup/layout           layout(core2base/layout)    core2
 headsup/themes           theme+                      headsup/layout
 
+indexed/layout           layout                      core2
+indexed/themes           theme+                      indexed/layout
+
 leftovers/layout         layout(core2base/layout)    core2
 leftovers/themes         theme+                      leftovers/layout
 

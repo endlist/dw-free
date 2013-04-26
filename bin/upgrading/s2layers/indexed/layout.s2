@@ -1,0 +1,1439 @@
+layerinfo "type" = "layout";
+layerinfo "name" = "Indexed";
+layerinfo "redist_uniq" = "indexed/layout";
+layerinfo "author_name" = "wiring";
+layerinfo "lang" = "en";
+
+layerinfo "des" = "Fill this out.";
+
+set layout_authors = [ { "name" => "wiring", "type" => "user" } ];
+
+##===============================
+## Display settings - general
+##===============================
+
+propgroup presentation {
+    property use num_items_recent;
+    property use num_items_reading;
+    property use use_journalstyle_entry_page;
+    property use layout_type;
+    property use tags_page_type;
+    property use sidebar_width;
+    property use sidebar_width_doubled;
+    property use use_custom_friend_colors;
+}
+
+set layout_type = "none";
+set use_custom_friend_colors = false;
+
+# TODO: What on earth are these doing?
+#set sidebar_width = "15em";
+#set sidebar_width_doubled = "30em";
+#set custom_foreground_element = "userpic_border";
+#set custom_background_element = "userpic_background";
+
+##===============================
+## Journal style - colors
+##===============================
+
+propgroup colors {
+
+    property use color_page_background;
+    property use color_page_text;
+    property use color_page_link;
+    property use color_page_link_active;
+    property use color_page_link_hover;
+    property use color_page_link_visited;
+    property use color_page_border;
+    property use color_page_title;
+    
+    property use color_header_background;
+    property use color_footer_background;
+    property use color_footer_link;
+    property use color_footer_link_active;
+    property use color_footer_link_hover;
+    property use color_footer_link_visited;
+
+    property use color_module_background;
+    property use color_module_text;
+    property use color_module_link;
+    property use color_module_link_active;
+    property use color_module_link_hover;
+    property use color_module_link_visited;
+    property use color_module_border;
+    property use color_module_title;
+    property use color_module_title_background;
+
+    property use color_entry_background;
+    property use color_entry_text;
+    property use color_entry_link;
+    property use color_entry_link_active;
+    property use color_entry_link_hover;
+    property use color_entry_link_visited;
+    property use color_entry_border;
+    property use color_entry_title;
+    property use color_entry_title_background;
+    property use color_entry_interaction_links;
+    
+    property use color_comment_title_background;
+}
+
+propgroup colors_child {
+
+    property Color color_userpic_background {
+        des = "Userpic background color";
+        note ="Leave blank for transparency.";
+    }
+}
+
+propgroup simplecolors = "Simple Colors";
+propgroup simplecolors {
+
+    property Color color_accent_one { des = "First Accent Color"; }
+    property Color color_accent_two { des = "Second Accent Color"; }
+    property Color color_accent_three { des = "Third Accent Color"; }
+    property Color gradient_step_one { des = "Gradient - Step One (Lightest)"; }
+    property Color gradient_step_two { des = "Gradient - Step Two"; }
+    property Color gradient_step_three { des = "Gradient - Step Three"; }
+    property Color gradient_step_four { des = "Gradient - Step Four"; }
+    property Color gradient_step_five { des = "Gradient - Step Five"; }
+    property Color gradient_step_six { des = "Gradient - Step Six"; }
+    property Color gradient_step_seven { des = "Gradient - Step Seven"; }
+    property Color gradient_step_eight { des = "Gradient - Step Eight"; }
+    property Color gradient_step_nine { des = "Gradient - Step Nine"; }
+    property Color gradient_step_ten { des = "Gradient - Step Ten"; }
+    property Color gradient_step_eleven { des = "Gradient - Step Eleven"; }
+    property Color gradient_step_twelve { des = "Gradient - Step Twelve"; }
+    property Color gradient_step_thirteen { des = "Gradient - Step Thirteen"; }
+    property Color gradient_step_fourteen { des = "Gradient - Step Fourteen"; }
+    property Color gradient_step_fifteen { des = "Gradient - Step Fifteen"; }
+}
+
+
+##===============================
+## Display settings - fonts
+##===============================
+
+propgroup fonts {
+    property use font_base;
+    property use font_fallback;
+    property use font_base_size;
+    property use font_base_units;
+    property use font_journal_title;
+    property use font_journal_title_size;
+    property use font_journal_title_units;
+    property use font_journal_subtitle;
+    property use font_journal_subtitle_size;
+    property use font_journal_subtitle_units;
+    property use font_entry_title;
+    property use font_entry_title_size;
+    property use font_entry_title_units;
+    property use font_module_heading;
+    property use font_module_heading_size;
+    property use font_module_heading_units;
+    property use font_module_text;
+    property use font_module_text_size;
+    property use font_module_text_units;
+	
+	property string font_serif {
+		des = "Currently for replacing Georgia";
+	}
+	property string font_mono {
+		des = "Currently for replacing Courier New";
+	}
+	property string font_sansserif {
+		des = "Currently for replacing Arial";
+	}
+}
+
+set font_base = "Arial";
+set font_fallback = "sans-serif";
+set font_base_size = "100";
+set font_base_units = "%";
+
+set font_entry_title = "Georgia, serif";
+set font_entry_title_size = "2.5";
+set font_entry_title_units = "em";
+
+set font_journal_title = "Arial Black";
+set font_journal_title_size = "8";
+set font_journal_title_units = "em";
+set font_journal_subtitle = "Arial";
+set font_journal_subtitle_size = "1.2";
+set font_journal_subtitle_units = "em";
+
+set font_serif = "Georgia, serif";
+set font_mono = "Courier New";
+set font_sansserif = "Arial, sans-serif";
+
+##===============================
+## Display settings - images
+##===============================
+
+propgroup images {
+    property use image_background_page_group;
+    property use image_background_header_group;
+    property use image_background_header_height;
+    property use image_background_entry_group;
+    property use image_background_module_group;
+}
+
+propgroup images_child {
+
+    property string[] image_background_userpic_group {
+        des = "Userpic background image";
+        grouptype = "image";
+    }
+    set image_background_userpic_group = [ "image_background_userpic_url", "image_background_userpic_repeat", "image_background_userpic_position" ];
+    property string image_background_userpic_url {
+        grouped = 1;
+    }
+    property string image_background_userpic_repeat {
+        values = "repeat|tile image|no-repeat|don't tile|repeat-x|tile horizontally|repeat-y|tile vertically";
+        grouped = 1;
+    }
+    property string image_background_userpic_position {
+    	values = "top left|top left|top center|top center|top right|top right|center left|center left|center center|center|center right|center right|bottom left|bottom left|bottom center|bottom center|bottom right|bottom right";
+        grouped = 1;
+        allow_other = 1;
+    }
+}
+
+##===============================
+## Display settings - modules
+##===============================
+
+propgroup modules {
+    property use module_userprofile_group;
+    property use module_navlinks_group;
+    property use module_customtext_group;
+    property use module_calendar_group;
+    property use module_pagesummary_group;
+    property use module_active_group;
+    property use module_tags_group;
+    property use module_links_group;
+    property use module_syndicate_group;
+    property use module_time_group;
+    property use module_poweredby_group;
+    property use module_credit_group;
+}
+
+# explicitly define what sections the layout has available
+set module_layout_sections = "none|(none)";
+set module_navlinks_section = "two";
+
+##===============================
+## Custom CSS
+##===============================
+
+propgroup customcss {
+    property use external_stylesheet;
+    property use include_default_stylesheet;
+    property use linked_stylesheet;
+    property use custom_css;
+}
+
+propgroup text {
+##===============================
+## Text - main navigation
+##===============================
+
+    property use text_view_recent;
+    property use text_view_friends;
+    property use text_view_network;
+    property use text_view_archive;
+    property use text_view_userinfo;
+    property use text_view_memories;
+    property use text_view_tags;
+
+##===============================
+## Text - entry comment-related
+##===============================
+
+    property use text_post_comment;
+    property use text_max_comments;
+    property use text_read_comments;
+    property use text_post_comment_friends;
+    property use text_read_comments_friends;
+
+    property use text_skiplinks_back;
+    property use text_skiplinks_forward;
+    property use text_meta_music;
+    property use text_meta_mood;
+    property use text_meta_location;
+    property use text_tags;
+
+    property use text_entry_prev;
+    property use text_entry_next;
+    property use text_edit_entry;
+    property use text_edit_tags;
+    property use text_tell_friend;
+    property use text_mem_add;
+    property use text_watch_comments;
+    property use text_unwatch_comments;
+    property use text_permalink;
+    property use text_stickyentry_subject;
+
+    property use text_module_customtext;
+    property use text_module_customtext_content;
+    property use text_module_customtext_url;
+}
+
+
+
+##=========================
+## Other
+##=========================
+
+set module_credit_section = "two";
+set module_links_section = "two";
+set module_pagesummary_section = "two";
+set module_userprofile_opts_website = true;
+set num_items_reading = 50;
+set num_items_recent = 50;
+set text_module_customtext_content = "Testing textbox.";
+set use_journalstyle_entry_page = true;
+
+
+function Page::print_default_stylesheet() {
+    var string page_background = generate_background_css ($*image_background_page_url, $*image_background_page_repeat, $*image_background_page_position, $*color_page_background);
+    var string header_background = generate_background_css ($*image_background_header_url, $*image_background_header_repeat, $*image_background_header_position, $*color_header_background);
+    if ($*image_background_header_height > 0) {
+        $header_background = """
+            $header_background
+            height: """ + $*image_background_header_height + """px;""";
+    }
+    
+    var string footer_background = generate_background_css( "", "", "", $*color_footer_background );
+    var string footer_link_colors = generate_color_css( $*color_footer_link, new Color, new Color );
+    var string footer_link_active_colors = generate_color_css( $*color_footer_link_active, new Color, new Color );
+    var string footer_link_hover_colors = generate_color_css( $*color_footer_link_hover, new Color, new Color );
+    var string footer_link_visited_colors = generate_color_css( $*color_footer_link_visited, new Color, new Color );
+
+    var string entry_background = generate_background_css ($*image_background_entry_url, $*image_background_entry_repeat, $*image_background_entry_position, $*color_entry_background);
+    var string module_background = generate_background_css ($*image_background_module_url, $*image_background_module_repeat, $*image_background_module_position, $*color_module_background);
+    var string userpic_background = generate_background_css( $*image_background_userpic_url, $*image_background_userpic_repeat, $*image_background_userpic_position, $*color_userpic_background);
+
+    var string page_colors = generate_color_css($*color_page_text, $*color_page_background, $*color_page_border);
+    var string entry_colors = generate_color_css($*color_entry_text, $*color_entry_background, $*color_entry_border);
+    var string module_colors = generate_color_css($*color_module_text, $*color_module_background, $*color_module_border);
+
+    var string page_title_colors = generate_color_css($*color_page_title, new Color, new Color);
+    var string entry_title_colors = generate_color_css($*color_entry_title, $*color_entry_title_background, new Color);
+    var string comment_title_colors = generate_color_css(new Color, $*color_comment_title_background, new Color);
+    var string module_title_colors = generate_color_css($*color_module_title, $*color_module_title_background, new Color);
+
+    var string page_link_colors = generate_color_css($*color_page_link, new Color, new Color);
+    var string page_link_active_colors = generate_color_css($*color_page_link_active, new Color, new Color);
+    var string page_link_hover_colors = generate_color_css($*color_page_link_hover, new Color, new Color);
+    var string page_link_visited_colors = generate_color_css($*color_page_link_visited, new Color, new Color);
+
+    var string entry_link_colors = generate_color_css($*color_entry_link, new Color, new Color);
+    var string entry_link_active_colors = generate_color_css($*color_entry_link_active, new Color, new Color);
+    var string entry_link_hover_colors = generate_color_css($*color_entry_link_hover, new Color, new Color);
+    var string entry_link_visited_colors = generate_color_css($*color_entry_link_visited, new Color, new Color);
+    var string entry_interaction_link_colors = generate_color_css($*color_entry_interaction_links, new Color, new Color);
+
+    var string module_link_colors = generate_color_css($*color_module_link, new Color, new Color);
+    var string module_link_active_colors = generate_color_css($*color_module_link_active, new Color, new Color);
+    var string module_link_hover_colors = generate_color_css($*color_module_link_hover, new Color, new Color);
+    var string module_link_visited_colors = generate_color_css($*color_module_link_visited, new Color, new Color);
+	
+    var string page_font = generate_font_css($*font_base, $*font_fallback, $*font_base_size, $*font_base_units);
+    var string page_title_font = generate_font_css($*font_journal_title, $*font_fallback, $*font_journal_title_size, $*font_journal_title_units);
+    var string page_subtitle_font = generate_font_css($*font_journal_subtitle, $*font_fallback, $*font_journal_subtitle_size, $*font_journal_subtitle_units);
+    var string entry_title_font = generate_font_css($*font_entry_title, $*font_fallback, $*font_entry_title_size, $*font_entry_title_units);
+    var string module_font = generate_font_css($*font_module_text, $*font_fallback, $*font_module_text_size, $*font_module_text_units);
+    var string module_title_font = generate_font_css($*font_module_heading, $*font_fallback, $*font_module_heading_size, $*font_module_heading_units);
+	
+    """
+/*----------------------------------------------
+  BASE STYLES
+  ----------------------------------------------*/
+	
+	body {
+		padding-left:17em;
+		padding-top:0;
+		$page_font
+		margin-top:0;
+		$page_background
+		$page_colors
+	}
+	
+	img {
+		border:none;
+	}
+
+	hr {
+		display:none;
+	}
+
+	q {
+		font-style:italic;
+	}
+
+	i {
+		color: $*color_accent_one;
+		font-family:$*font_entry_title;
+		font-style:italic;
+	}
+
+	em {
+		color: $*color_accent_one;
+		font-family:$*font_entry_title;
+		font-style:italic;
+	}
+
+	b {
+		color: $*color_accent_two;
+		font-weight:700;
+	}
+
+	strong {
+		color: $*color_accent_two;
+		font-weight:700;
+	}
+
+	ul {
+		list-style:none;
+		padding:0 .5em;
+	}
+
+	ul li li {
+		margin-left:.5em;
+	}
+
+	a {
+		$page_link_colors
+		text-decoration:none;
+	}
+
+	a b {
+		$page_link_colors
+		$page_font
+	}
+
+	a i {
+		$page_font
+	}
+
+	a:hover {
+		$page_link_hover_colors
+		text-decoration:none;
+	}
+
+	a:hover b {
+		$page_link_hover_colors
+	}
+
+	a:visited {
+		$page_link_visited_colors
+		text-decoration:none;
+	}
+
+	a:active {
+		$page_link_active_colors
+		text-decoration:none;
+	}
+
+	select {
+		background:$*gradient_step_ten;
+		border:1px solid $*gradient_step_thirteen;
+		color:$*gradient_step_six;
+		font-family:$*font_entry_title;
+		font-size:$*font_base_size$*font_base_units;
+		font-style:italic;
+	}
+
+	option {
+		background:$*gradient_step_ten;
+		border:1px solid $*gradient_step_thirteen;
+		color:$*gradient_step_six;
+		font-family:$*font_entry_title;
+		font-size:$*font_base_size$*font_base_units;
+		font-style:italic;
+	}
+
+	input {
+		background:$*gradient_step_ten;
+		border:1px solid $*gradient_step_thirteen;
+		color:$*gradient_step_six;
+		font-family:$*font_entry_title;
+		font-size:$*font_base_size$*font_base_units;
+		font-style:italic;
+	}
+
+	textarea {
+		background:$*gradient_step_ten;
+		border:1px solid $*gradient_step_thirteen;
+		color:$*gradient_step_six;
+		font-family:$*font_entry_title;
+		font-size:$*font_base_size$*font_base_units;
+	}
+
+	blockquote {
+		/*background:$*gradient_step_ten url($*image_background_userpic_url) repeat-y -5rem -.5rem;*/
+		$userpic_background;
+		display:inline-block;
+		font-family:$*font_serif;
+		font-style:italic;
+		padding:1em 1em 1em 5em;
+	}
+	
+/*----------------------------------------------
+  STRUCTURE
+  ----------------------------------------------*/
+
+	#canvas {
+		border:none;
+		padding-left:10em;
+		width:70%;
+		z-index:5;
+	}
+
+	.entry .contents img,
+	iframe,
+	iframe #document iframe {
+		max-width:100%;
+	}
+	
+	/*-----------------------
+	  Header & Footer
+	  -----------------------*/
+	
+	#header,
+	#footer {
+		clear: both;
+		padding: .5em;
+		text-transform: lowercase;
+	}
+
+	#header {
+		$header_background
+		$page_title_colors
+		position:relative;
+		margin:0 5em 0 -12em;
+		z-index:15;
+	}
+
+	h1#title {
+		$page_title_font
+		line-height: .6em;
+		margin-top:.5em;
+	}
+
+	h2#subtitle {
+		margin:0;
+		padding-left:2em;
+		$page_subtitle_font
+		font-weight:normal;
+		position:relative;
+		top:-3.5em;
+	}
+
+	h2#pagetitle {
+		margin-left:auto;
+		margin-top:-1.5em;
+		position:relative;
+		z-index:15;
+	}
+
+	.page-entry h2#pagetitle {
+		visibility:hidden;
+	}
+	
+	#footer {
+		$footer_background
+		text-align:right;
+		margin:0 5em 0 0;
+	}
+
+	#footer a {
+		font-weight:700;
+		text-decoration:none;
+	}
+
+	#footer a:visited {
+		font-weight:700;
+		text-decoration:none;
+	}
+
+	#footer a:active {
+		font-weight:700;
+		text-decoration:none;
+	}
+
+	#primary {
+		background-color:none;
+		float:left;
+		margin-right:-100%;
+		width:100%;
+	}
+
+	#primary > .inner:first-child {
+		background-color:$*gradient_step_ten;
+		margin-right:5em;
+		padding:1em 1em 2em;
+	}
+	
+	/*-----------------------
+	  Navigation
+	  -----------------------*/
+
+	.topnav {
+		float:right;
+		margin-right:-1.5em;
+		margin-top:-7.3em;
+		position:relative;
+		text-transform:uppercase;
+		z-index:50;
+	}
+
+	.bottomnav {
+		float:right;
+		margin-bottom:-1em;
+		margin-right:-1.5em;
+		margin-top:-2.2em;
+		padding-top:1em;
+		text-transform:uppercase;
+	}
+
+	.navigation li {
+		display:inline;
+		$entry_background
+		padding:.5em;
+		font-size:.8em;
+	}
+
+	.navigation .page-separator {
+		display:none;
+	}
+
+	.navigation a {
+		text-decoration:none;
+	}
+
+	.navigation a:visited {
+		text-decoration:none;
+	}
+
+	.navigation a:hover {
+		text-decoration:none;
+	}
+
+	.navigation a:active {
+		text-decoration:none;
+	}
+
+	/*-----------------------
+	  Entries & Comments
+	  -----------------------*/
+
+	#entries {
+		margin:3.2em 0 0;
+	}
+
+	.entry-wrapper {
+		background-color:none;
+		margin:2em 0 2.5em -1em;
+		padding-left:1em;
+	}
+
+	.entry {
+		$page_font
+		margin:0 .5em -1em;
+		padding:.1em 1em;
+		position:relative;
+		z-index:0;
+		$entry_background
+		$entry_colors
+	}
+
+	.entry-title {
+		line-height:.6em;
+		margin-bottom:0;
+		text-align:right;
+		text-transform:lowercase;
+		$entry_title_font
+		$entry_title_colors
+		font-style: italic;
+		font-weight: 400;
+	}
+
+	.entry-title a {
+		text-decoration:none;
+	}
+
+	.entry-title a:visited {
+		text-decoration:none;
+	}
+
+	.entry-title a:active {
+		text-decoration:none;
+	}
+
+	.entry-title a:hover {
+		text-decoration:none;
+	}
+
+	.datetime {
+		color: $*color_accent_one;
+		float:right;
+		font-size:$*font_base_size$*font_base_units;
+		font-style:italic;
+		text-transform:lowercase;
+	}
+
+	.edittime .datetime {
+		float:none;
+	}
+	
+	.entry-content hr,
+	.comment-content hr {
+		display:block;
+		margin:1em 10%;
+	}
+	
+	.entry-content {
+		font-size:$*font_base_size$*font_base_units;
+		margin-bottom:-2em;
+		margin-top:2em;
+	}
+
+	.entry-poster {
+		color:$*gradient_step_seven;
+		float:left;
+		font-family:$*font_base;
+		font-size:.8em;
+		font-style:italic;
+		margin-bottom:.8em;
+		margin-left:-1.5em;
+		margin-top:-1.5em;
+		padding:0 1em;
+		text-transform:uppercase;
+		width:100%;
+	}
+
+	.entry-poster a {
+		text-decoration:none;
+	}
+
+	.entry-poster a b {
+		color:$*gradient_step_four;
+		font-family:$*font_base;
+	}
+
+	.entry-poster img {
+		-khtml-opacity:0.5;
+		-moz-opacity:0.5;
+		filter:alpha(opacity=50);
+		height:1.5em;
+		opacity:0.5;
+		width:1.5em;
+	}
+
+	.entry ul {
+		list-style:circle outside;
+		padding:0 2em;
+	}
+
+	.entry ol {
+		list-style:decimal-leading-zero inside;
+		padding:0 .5em;
+	}
+
+	.entry ul li li {
+		background:none;
+		margin-left:.5em;
+	}
+
+	.entry-wrapper .userpic {
+		background: $*gradient_step_thirteen;
+		float: right;
+		padding: 1em;
+		position: relative;
+		margin: -2.65em -8.5em 0 0;
+	}
+
+	.entry-wrapper .userpic img {
+		max-height:5.5em;
+		max-width:5.5em;
+	}
+
+	.metatypes {
+		float:right;
+		margin-top:-1.75em;
+	}
+
+	.metadata {
+		margin-bottom:-3em;
+		margin-top:3em;
+	}
+
+	.metadata-label {
+		font-family:$*font_base;
+		font-size:.9em;
+		font-weight:700;
+		margin:0;
+		text-transform:lowercase;
+	}
+
+	.metadata ul {
+		border-top:1px solid $*gradient_step_ten;
+		margin:0;
+		padding:0;
+	}
+
+	.metadata li {
+		border-bottom:1px solid $*gradient_step_ten;
+		min-height:2em;
+		padding-top:.3em;
+	}
+
+	.metadata-item {
+		color:$*gradient_step_six;
+		font-family:$*font_serif;
+		font-size:1.4em;
+		font-style:italic;
+		text-transform:lowercase;
+	}
+
+	.metadata-item-xpost {
+		word-wrap: break-word;
+	}
+
+	.metadata li + li + li {
+		border-bottom:1px solid $*gradient_step_ten;
+	}
+
+	.metadata li + li {
+		border-bottom:1px solid $*gradient_step_ten;
+	}
+
+	.metadata li + li + li + li {
+		border-bottom:1px solid $*gradient_step_ten;
+	}
+
+	.metadata-item a {
+		text-decoration:none;
+	}
+
+	.metadata-item a:visited {
+		text-decoration:none;
+	}
+
+	.metadata-item a:active {
+		text-decoration:none;
+	}
+
+	.metadata-item a:hover {
+		text-decoration:none;
+	}
+
+	.metadata-label-mood {
+		display:none;
+	}
+
+	.metadata-item-mood {
+		float:right;
+	}
+
+	.footer {
+		padding-top:3em;
+		text-align:right;
+	}
+
+	.comment-management-links ul,
+	.entry-management-links ul,
+	.tag ul,
+	.entry-interaction-links ul,
+	.comment-interaction-links ul {
+		margin-left:0;
+		padding-left:0;
+	}
+
+	.comment-management-links li,
+	.entry-management-links li,
+	.tag li,
+	.entry-interaction-links li,
+	.comment-interaction-links li {
+		display:inline;
+	}
+
+	.tag-text {
+		display:none;
+	}
+
+	.tag a {
+		text-decoration:none;
+	}
+
+	.bottomcomment {
+		margin-left:1em;
+	}
+
+	.entry-interaction-links a {
+		background-color:$*gradient_step_ten;
+		border:5px solid;
+		border-color:$*gradient_step_ten;
+		font-family:$*font_base;
+		font-size:1.1em;
+		font-weight:700;
+		line-height:2em;
+		padding:2px 5px;
+		text-decoration:none;
+		text-transform:uppercase;
+	}
+
+	.entry-interaction-links a:hover {
+		background-color:$*gradient_step_fifteen;
+		border-color:$*gradient_step_fifteen;
+		color:$*gradient_step_one;
+	}
+
+	.comment-interaction-links a {
+		background-color:$*gradient_step_ten;
+		border:5px solid;
+		border-color:$*gradient_step_ten;
+		font-family:$*font_base;
+		font-size:$*font_base_size$*font_base_units;
+		font-weight:700;
+		line-height:2em;
+		padding:2px 5px;
+		text-decoration:none;
+		text-transform:uppercase;
+	}
+
+	.comment-interaction-links a:hover {
+		background-color:$*gradient_step_fifteen;
+		border-color:$*gradient_step_fifteen;
+		color:$*gradient_step_one;
+	}
+
+	.above-entry-interaction-links,
+	.below-reply-container {
+		display:none;
+	}
+
+	.comment-wrapper {
+		border:1px solid;
+		$entry_background
+		border-color:$*gradient_step_twelve;
+		margin:0 .5em;
+		padding:1em;
+	}
+
+	.comment-wrapper .userpic img {
+		$userpic_background;
+		float:left;
+		margin:0 1em 1em 0;
+		padding:1em;
+	}
+
+	.comment-poster {
+		color:$*gradient_step_seven;
+		font-family:$*font_base;
+		font-size:.8em;
+		font-style:italic;
+		text-transform:uppercase;
+	}
+
+	.comment-poster a {
+		color:$*gradient_step_four;
+		text-decoration:none;
+	}
+
+	.comment-poster img {
+		-khtml-opacity:0.5;
+		-moz-opacity:0.5;
+		filter:alpha(opacity=50);
+		height:1.5em;
+		opacity:0.5;
+		width:1.5em;
+	}
+
+	.poster-ip {
+		$page_font
+		font-size:.7em;
+		font-style:italic;
+		text-transform:lowercase;
+	}
+
+	.comment-content {
+		$page_font
+		margin-top:1em;
+	}
+
+	.tags-container {
+		margin:3em 1em 0;
+	}
+	
+	/*-----------------------
+	  Single Entry Page
+	  -----------------------*/
+	
+	.page-entry #primary .inner .userpic {
+		margin-top:3.5em;
+		padding-bottom:-3.5em;
+	}
+	
+	/*-----------------------
+	  Entry Reply Page
+	  -----------------------*/
+	
+	.page-reply #primary .inner .userpic {
+		margin-top:3.5em;
+		padding-bottom:-3.5em;
+	}
+
+	.page-entry #primary .inner .comment-wrapper .userpic {
+		margin-top:0;
+	}
+
+	.page-reply #primary .inner .comment-wrapper .userpic {
+		margin-top:0;
+	}
+
+	.page-separator {
+		display:none;
+	}
+	
+	/*-----------------------
+	  First Sidebar (Far Left)
+	  -----------------------*/
+	
+	#secondary {
+		background-color:none;
+		color:$*gradient_step_two;
+		float:left;
+		margin-left:-25em;
+		margin-top:-10em;
+		width:13.2em;
+		z-index:10;
+	}
+
+	#secondary > .inner:first-child {
+		font-family:$*font_base;
+		font-size:.8em;
+	}
+
+	#secondary h2 {
+		background:$*gradient_step_thirteen;
+		color: $*color_accent_two;
+		font-family:$*font_serif;
+		font-size:1.6em;
+		font-style:italic;
+		font-weight:400;
+		line-height:.8em;
+		padding:.5em 0 0 .2em;
+		text-transform:lowercase;
+	}
+
+	#secondary h2 a {
+		color: $*color_accent_two;
+	}
+
+	#secondary .module-wrapper {
+		margin:0;
+		padding:0;
+		width:100%;
+	}
+
+	#secondary .module-content {
+		$module_colors
+		padding:.4em;
+	}
+	
+	/*-----------------------
+	  User Profile Module
+	  -----------------------*/
+	.module-userprofile .userpic img {
+		/*background:#eee url($*image_background_userpic_url) repeat 0 0;*/
+		$userpic_background;
+		border:0;
+		display: block;
+		margin:1em auto;
+		padding:10px;
+		width: 6.25rem;
+		height: 6.25rem;
+	}
+
+	.module-userprofile .journal-name {
+		display:none;
+	}
+
+	.module-userprofile .journal-website-name {
+		display:none;
+	}
+
+	.module-userprofile .userlite-interaction-links {
+		margin:1em 2em;
+	}
+
+	.module-userprofile li {
+		display:inline;
+		padding:0;
+	}
+
+	.module-userprofile li.message {
+		border: 0;
+	}
+	/*-----------------------
+	  Calendar Module
+	  -----------------------*/
+	.module-calendar .module-content {
+		font-family:$*font_base;
+		padding:1em;
+	}
+
+	.module-calendar .module-content table {
+		margin:auto;
+		text-align:center;
+	}
+
+	.module-calendar .module-content .entry-day {
+		background-color:$*gradient_step_six;
+		border:1px solid;
+		border-color:$*gradient_step_seven;
+		color:$*gradient_step_fifteen;
+	}
+
+	.module-calendar .module-content .entry-day a {
+		color:$*gradient_step_fifteen;
+	}
+
+	.module-calendar .module-content .empty-day {
+		background-color:$*gradient_step_eight;
+		border:1px solid;
+		border-color:$*gradient_step_nine;
+		color:$*gradient_step_fifteen;
+	}
+	/*-----------------------
+	  Page Summary Module
+	  -----------------------*/
+	.module-pagesummary .module-list-item {
+		background-color:$*gradient_step_ten;
+		border:1px solid;
+		border-color:$*gradient_step_eleven;
+		margin-bottom:.3em;
+		padding:2px;
+		text-align:center;
+	}
+
+	.module-pagesummary .ljuser {
+		white-space:normal;
+	}
+
+	.module-pagesummary .module-content {
+		word-wrap:break-word;
+	}
+	
+	/*-----------------------
+	  Second Sidebar (Near left)
+	  -----------------------*/
+	#tertiary {
+		background-color:$*gradient_step_ten;
+		color:$*gradient_step_two;
+		float:left;
+		margin-left:-12em;
+		padding-right:1em;
+		width:12.4em;
+	}
+
+	#tertiary > .inner:first-child {
+		font-family:$*font_base;
+		font-size:.8em;
+		padding:1em 0 2em 1.5em;
+	}
+
+	#tertiary h2 {
+		font-family:$*font_serif;
+		font-size:1.6em;
+		font-style:italic;
+		font-weight:400;
+		margin-bottom:-.8em;
+		margin-left:.5em;
+		text-transform:lowercase;
+	}
+
+	#tertiary .module-content {
+		border:1px solid;
+		$entry_background
+		border-color:$*gradient_step_twelve;
+		margin:.3em 0;
+		padding:.5em;
+	}
+
+	#tertiary .module-navlinks {
+		font-family:$*font_base;
+		font-size:1.1em;
+		font-weight:700;
+		margin-bottom:2em;
+		margin-left:-1.5em;
+		margin-top:-1em;
+		position:relative;
+		text-transform:uppercase;
+		width:55em;
+		z-index:1000;
+	}
+
+	#tertiary .module-navlinks .module-content {
+		background:none;
+		border:none;
+		margin:0;
+		padding:0;
+	}
+
+	#tertiary .module-navlinks li {
+		display:inline;
+	}
+
+	#tertiary .module-navlinks li a {
+		background-color:$*gradient_step_fifteen;
+		padding:1em;
+	}
+
+	#tertiary .module-navlinks li a:hover {
+		$module_colors
+	}
+
+	#tertiary .module-tags_multilevel li:hover {
+		background:url($*image_background_header_url) repeat 0 0;
+	}
+
+	#tertiary .module-tags_multilevel li li li:hover {
+		background:url($*image_background_header_url) repeat 0 0;
+	}
+
+	#tertiary .module-tags_multilevel li li:hover {
+		$module_colors
+	}
+
+	#tertiary .module-tags_multilevel li li li li:hover {
+		$module_colors
+	}
+
+	#tertiary .module-tags_multilevel .module-list-item {
+		border:1px solid;
+		$entry_background
+		border-color:$*gradient_step_twelve;
+		margin:.3em 0;
+		padding:.5em;
+	}
+
+	#tertiary .module-tags_multilevel .module-list-item li li li {
+		border:0;
+		margin-left:-1em;
+	}
+
+	#tertiary .module-tags_multilevel a {
+		text-decoration:none;
+	}
+	
+	/*-----------------------
+	  Archive
+	  -----------------------*/
+	#archive-year {
+		padding:0 0 1em;
+	}
+
+	#archive-year .bottomnav {
+		margin-top:-1.2em;
+	}
+
+	.page-archive .month .inner .header {
+		font-family:$*font_base;
+		font-size:2em;
+		height:1.7em;
+		letter-spacing:-.1em;
+		text-align:right;
+		text-transform:lowercase;
+	}
+
+	.page-archive .contents .inner caption {
+		display:none;
+	}
+
+	.page-archive .month th {
+		font-family:$*font_base;
+		font-size:$*font_base_size$*font_base_units;
+		padding:1em;
+	}
+
+	.page-archive .month table {
+		width:100%;
+	}
+
+	.page-archive .month tr {
+		border:1px solid;
+		border-color:$*gradient_step_fifteen;
+	}
+
+	.page-archive .month td.day {
+		$module_colors
+		line-height:3.5em;
+		margin-bottom:10px;
+		padding:.3em;
+		text-align:center;
+	}
+
+	.page-archive .month td.day-has-entries {
+		line-height:.55em;
+		padding:.3em;
+	}
+
+	#archive-month {
+		padding:2.8em 1em 2em;
+	}
+
+	#archive-month .navigation form {
+		border:0;
+	}
+
+	#archive-month .navigation input {
+		$module_colors
+		border:1px solid;
+		border-color:$*gradient_step_fourteen;
+		color:$*gradient_step_one;
+		font-family:$*font_base;
+		font-size:.9em;
+	}
+
+	#archive-month .navigation input .hidden {
+		display:none;
+	}
+
+	#archive-month .navigation select {
+		$module_colors
+		border:1px solid;
+		border-color:$*gradient_step_fourteen;
+		color:$*gradient_step_one;
+		font-family:$*font_base;
+		font-size:.9em;
+	}
+
+	#archive-month .navigation option {
+		$module_colors
+		color:$*gradient_step_one;
+		font-family:$*font_base;
+		font-size:.9em;
+	}
+
+	#archive-month .topnav {
+		margin:-8.4em -2em 0 0;
+	}
+
+	#archive-month .navigation ul {
+		display:inline;
+	}
+
+	#archive-month .navigation li {
+		display:inline;
+	}
+
+	#archive-month .month {
+		margin-bottom:3em;
+	}
+
+	#archive-month .bottomnav {
+		margin:-2em -2em 0 0;
+	}
+
+	#archive-month dt {
+		font-family:$*font_base;
+		font-size:$*font_base_size$*font_base_units;
+		font-weight:700;
+		letter-spacing:.2em;
+	}
+
+	#archive-month dt a {
+		background:#292929;
+		color: $*color_accent_one;
+		font-size:2em;
+		letter-spacing:-.15em;
+		padding:0 .5em .5em;
+		text-transform:uppercase;
+	}
+
+	#archive-month .entry-title {
+		font-family:$*font_serif;
+		font-size:1.5em;
+		font-style:italic;
+		font-weight:400;
+		margin:0;
+		text-align:left;
+		text-transform:lowercase;
+	}
+
+	#archive-month .datetime {
+		color:$*gradient_step_six;
+		float:left;
+	}
+
+	#archive-month dd {
+		background:$*gradient_step_twelve;
+		margin:-2.5em 0 1em 1em;
+		padding:4.5em 1em 1em;
+	}
+
+	#archive-day .navigation .topnav {
+		float:right;
+		margin-right:-9em;
+		margin-top:-2.5em;
+		position:relative;
+	}
+
+	#archive-day .day-date {
+		display:none;
+	}
+	
+	/*-----------------------
+	  Small Screens
+	  -----------------------*/
+	@media screen and (max-width:800px) {
+		body{
+		}
+	}
+    """;
+
+}
+
+function Page::print_entry(Entry e) 
+"The meat of each new layout. Describes how each page will look. In nearly all cases, the logic and decision-making processes should come from pre-existing functions in core2, and should not get written here. If you limit the structure of the page to HTML, function calls, and attached CSS, then you will be able to pick up all of the enhancements  and accessibility requirements managed by core2."
+{
+    ## For most styles, this will be overridden by FriendsPage::print_entry and such.
+    $e->print_wrapper_start();
+    $e->print_userpic();
+    """<div class="header">\n""";
+    $e->print_poster();
+    """<span class="metatypes">""";
+    $e->print_metatypes();
+    """</span>\n""";
+    $e->print_subject();
+    $e->print_time();
+    """</div>\n""";
+    """<div>\n""";
+    """<div class="contents">\n""";
+    """<div class="inner">\n""";
+    $e->print_text();
+    $e->print_metadata();
+    """</div>\n""";
+    """</div>\n""";
+    """</div>\n""";
+    """<div class="footer">\n""";
+    """<div class="inner">\n""";
+    $e->print_tags();
+    $e->print_management_links();
+    if ($this isa EntryPage) {
+        """<hr class="above-entry-interaction-links" />""";
+        $e->print_interaction_links("topcomment");
+        $this->print_reply_container({ "target" => "topcomment" });
+        """<hr class="below-reply-container" />""";
+    }
+    else {
+        $e->print_interaction_links();
+    }
+    "</div>\n</div>\n";
+    $e->print_wrapper_end();
+
+}
