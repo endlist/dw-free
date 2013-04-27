@@ -219,8 +219,12 @@ propgroup modules {
 }
 
 # explicitly define what sections the layout has available
-set module_layout_sections = "none|(none)";
-set module_navlinks_section = "two";
+property string module_navlinks_section_override {
+    values = "none|(none)|header|Header|one|Main Module Section|two|Secondary Module Section";
+    grouped = 1;
+    }
+set grouped_property_override = { "module_navlinks_section" => "module_navlinks_section_override" };
+set module_navlinks_section = "header";
 
 ##===============================
 ## Custom CSS
@@ -347,1057 +351,1213 @@ function Page::print_default_stylesheet() {
     var string module_title_font = generate_font_css($*font_module_heading, $*font_fallback, $*font_module_heading_size, $*font_module_heading_units);
 	
     """
-/*----------------------------------------------
-  BASE STYLES
-  ----------------------------------------------*/
-	
-	body {
-		padding-left:17em;
-		padding-top:0;
-		$page_font
-		margin-top:0;
-		$page_background
-		$page_colors
-	}
-	
-	img {
-		border:none;
-	}
-
-	hr {
-		display:none;
-	}
-
-	q {
-		font-style:italic;
-	}
-
-	i {
-		color: $*color_accent_one;
-		font-family:$*font_entry_title;
-		font-style:italic;
-	}
-
-	em {
-		color: $*color_accent_one;
-		font-family:$*font_entry_title;
-		font-style:italic;
-	}
-
-	b {
-		color: $*color_accent_two;
-		font-weight:700;
-	}
-
-	strong {
-		color: $*color_accent_two;
-		font-weight:700;
-	}
-
-	ul {
-		list-style:none;
-		padding:0 .5em;
-	}
-
-	ul li li {
-		margin-left:.5em;
-	}
-
-	a {
-		$page_link_colors
-		text-decoration:none;
-	}
-
-	a b {
-		$page_link_colors
-		$page_font
-	}
-
-	a i {
-		$page_font
-	}
-
-	a:hover {
-		$page_link_hover_colors
-		text-decoration:none;
-	}
-
-	a:hover b {
-		$page_link_hover_colors
-	}
-
-	a:visited {
-		$page_link_visited_colors
-		text-decoration:none;
-	}
-
-	a:active {
-		$page_link_active_colors
-		text-decoration:none;
-	}
-
-	select {
-		background:$*gradient_step_ten;
-		border:1px solid $*gradient_step_thirteen;
-		color:$*gradient_step_six;
-		font-family:$*font_entry_title;
-		font-size:$*font_base_size$*font_base_units;
-		font-style:italic;
-	}
-
-	option {
-		background:$*gradient_step_ten;
-		border:1px solid $*gradient_step_thirteen;
-		color:$*gradient_step_six;
-		font-family:$*font_entry_title;
-		font-size:$*font_base_size$*font_base_units;
-		font-style:italic;
-	}
-
-	input {
-		background:$*gradient_step_ten;
-		border:1px solid $*gradient_step_thirteen;
-		color:$*gradient_step_six;
-		font-family:$*font_entry_title;
-		font-size:$*font_base_size$*font_base_units;
-		font-style:italic;
-	}
-
-	textarea {
-		background:$*gradient_step_ten;
-		border:1px solid $*gradient_step_thirteen;
-		color:$*gradient_step_six;
-		font-family:$*font_entry_title;
-		font-size:$*font_base_size$*font_base_units;
-	}
-
-	blockquote {
-		/*background:$*gradient_step_ten url($*image_background_userpic_url) repeat-y -5rem -.5rem;*/
-		$userpic_background;
-		display:inline-block;
-		font-family:$*font_serif;
-		font-style:italic;
-		padding:1em 1em 1em 5em;
-	}
-	
-/*----------------------------------------------
-  STRUCTURE
-  ----------------------------------------------*/
-
-	#canvas {
-		border:none;
-		padding-left:10em;
-		width:70%;
-		z-index:5;
-	}
-
-	.entry .contents img,
-	iframe,
-	iframe #document iframe {
-		max-width:100%;
-	}
-	
-	/*-----------------------
-	  Header & Footer
-	  -----------------------*/
-	
-	#header,
-	#footer {
-		clear: both;
-		padding: .5em;
-		text-transform: lowercase;
-	}
-
-	#header {
-		$header_background
-		$page_title_colors
-		position:relative;
-		margin:0 5em 0 -12em;
-		z-index:15;
-	}
-
-	h1#title {
-		$page_title_font
-		line-height: .6em;
-		margin-top:.5em;
-	}
-
-	h2#subtitle {
-		margin:0;
-		padding-left:2em;
-		$page_subtitle_font
-		font-weight:normal;
-		position:relative;
-		top:-3.5em;
-	}
-
-	h2#pagetitle {
-		margin-left:auto;
-		margin-top:-1.5em;
-		position:relative;
-		z-index:15;
-	}
-
-	.page-entry h2#pagetitle {
-		visibility:hidden;
-	}
-	
-	#footer {
-		$footer_background
-		text-align:right;
-		margin:0 5em 0 0;
-	}
-
-	#footer a {
-		font-weight:700;
-		text-decoration:none;
-	}
-
-	#footer a:visited {
-		font-weight:700;
-		text-decoration:none;
-	}
-
-	#footer a:active {
-		font-weight:700;
-		text-decoration:none;
-	}
-
-	#primary {
-		background-color:none;
-		float:left;
-		margin-right:-100%;
-		width:100%;
-	}
-
-	#primary > .inner:first-child {
-		background-color:$*gradient_step_ten;
-		margin-right:5em;
-		padding:1em 1em 2em;
-	}
-	
-	/*-----------------------
-	  Navigation
-	  -----------------------*/
-
-	.topnav {
-		float:right;
-		margin-right:-1.5em;
-		margin-top:-7.3em;
-		position:relative;
-		text-transform:uppercase;
-		z-index:50;
-	}
-
-	.bottomnav {
-		float:right;
-		margin-bottom:-1em;
-		margin-right:-1.5em;
-		margin-top:-2.2em;
-		padding-top:1em;
-		text-transform:uppercase;
-	}
-
-	.navigation li {
-		display:inline;
-		$entry_background
-		padding:.5em;
-		font-size:.8em;
-	}
-
-	.navigation .page-separator {
-		display:none;
-	}
-
-	.navigation a {
-		text-decoration:none;
-	}
-
-	.navigation a:visited {
-		text-decoration:none;
-	}
-
-	.navigation a:hover {
-		text-decoration:none;
-	}
-
-	.navigation a:active {
-		text-decoration:none;
-	}
-
-	/*-----------------------
-	  Entries & Comments
-	  -----------------------*/
-
-	#entries {
-		margin:3.2em 0 0;
-	}
-
-	.entry-wrapper {
-		background-color:none;
-		margin:2em 0 2.5em -1em;
-		padding-left:1em;
-	}
-
-	.entry {
-		$page_font
-		margin:0 .5em -1em;
-		padding:.1em 1em;
-		position:relative;
-		z-index:0;
-		$entry_background
-		$entry_colors
-	}
-
-	.entry-title {
-		line-height:.6em;
-		margin-bottom:0;
-		text-align:right;
-		text-transform:lowercase;
-		$entry_title_font
-		$entry_title_colors
-		font-style: italic;
-		font-weight: 400;
-	}
-
-	.entry-title a {
-		text-decoration:none;
-	}
-
-	.entry-title a:visited {
-		text-decoration:none;
-	}
-
-	.entry-title a:active {
-		text-decoration:none;
-	}
-
-	.entry-title a:hover {
-		text-decoration:none;
-	}
-
-	.datetime {
-		color: $*color_accent_one;
-		float:right;
-		font-size:$*font_base_size$*font_base_units;
-		font-style:italic;
-		text-transform:lowercase;
-	}
-
-	.edittime .datetime {
-		float:none;
-	}
-	
-	.entry-content hr,
-	.comment-content hr {
-		display:block;
-		margin:1em 10%;
-	}
-	
-	.entry-content {
-		font-size:$*font_base_size$*font_base_units;
-		margin-bottom:-2em;
-		margin-top:2em;
-	}
-
-	.entry-poster {
-		color:$*gradient_step_seven;
-		float:left;
-		font-family:$*font_base;
-		font-size:.8em;
-		font-style:italic;
-		margin-bottom:.8em;
-		margin-left:-1.5em;
-		margin-top:-1.5em;
-		padding:0 1em;
-		text-transform:uppercase;
-		width:100%;
-	}
-
-	.entry-poster a {
-		text-decoration:none;
-	}
-
-	.entry-poster a b {
-		color:$*gradient_step_four;
-		font-family:$*font_base;
-	}
-
-	.entry-poster img {
-		-khtml-opacity:0.5;
-		-moz-opacity:0.5;
-		filter:alpha(opacity=50);
-		height:1.5em;
-		opacity:0.5;
-		width:1.5em;
-	}
-
-	.entry ul {
-		list-style:circle outside;
-		padding:0 2em;
-	}
-
-	.entry ol {
-		list-style:decimal-leading-zero inside;
-		padding:0 .5em;
-	}
-
-	.entry ul li li {
-		background:none;
-		margin-left:.5em;
-	}
-
-	.entry-wrapper .userpic {
-		background: $*gradient_step_thirteen;
-		float: right;
-		padding: 1em;
-		position: relative;
-		margin: -2.65em -8.5em 0 0;
-	}
-
-	.entry-wrapper .userpic img {
-		max-height:5.5em;
-		max-width:5.5em;
-	}
-
-	.metatypes {
-		float:right;
-		margin-top:-1.75em;
-	}
-
-	.metadata {
-		margin-bottom:-3em;
-		margin-top:3em;
-	}
-
-	.metadata-label {
-		font-family:$*font_base;
-		font-size:.9em;
-		font-weight:700;
-		margin:0;
-		text-transform:lowercase;
-	}
-
-	.metadata ul {
-		border-top:1px solid $*gradient_step_ten;
-		margin:0;
-		padding:0;
-	}
-
-	.metadata li {
-		border-bottom:1px solid $*gradient_step_ten;
-		min-height:2em;
-		padding-top:.3em;
-	}
-
-	.metadata-item {
-		color:$*gradient_step_six;
-		font-family:$*font_serif;
-		font-size:1.4em;
-		font-style:italic;
-		text-transform:lowercase;
-	}
-
-	.metadata-item-xpost {
-		word-wrap: break-word;
-	}
-
-	.metadata li + li + li {
-		border-bottom:1px solid $*gradient_step_ten;
-	}
-
-	.metadata li + li {
-		border-bottom:1px solid $*gradient_step_ten;
-	}
-
-	.metadata li + li + li + li {
-		border-bottom:1px solid $*gradient_step_ten;
-	}
-
-	.metadata-item a {
-		text-decoration:none;
-	}
-
-	.metadata-item a:visited {
-		text-decoration:none;
-	}
-
-	.metadata-item a:active {
-		text-decoration:none;
-	}
-
-	.metadata-item a:hover {
-		text-decoration:none;
-	}
-
-	.metadata-label-mood {
-		display:none;
-	}
-
-	.metadata-item-mood {
-		float:right;
-	}
-
-	.footer {
-		padding-top:3em;
-		text-align:right;
-	}
-
-	.comment-management-links ul,
-	.entry-management-links ul,
-	.tag ul,
-	.entry-interaction-links ul,
-	.comment-interaction-links ul {
-		margin-left:0;
-		padding-left:0;
-	}
-
-	.comment-management-links li,
-	.entry-management-links li,
-	.tag li,
-	.entry-interaction-links li,
-	.comment-interaction-links li {
-		display:inline;
-	}
-
-	.tag-text {
-		display:none;
-	}
-
-	.tag a {
-		text-decoration:none;
-	}
-
-	.bottomcomment {
-		margin-left:1em;
-	}
-
-	.entry-interaction-links a {
-		background-color:$*gradient_step_ten;
-		border:5px solid;
-		border-color:$*gradient_step_ten;
-		font-family:$*font_base;
-		font-size:1.1em;
-		font-weight:700;
-		line-height:2em;
-		padding:2px 5px;
-		text-decoration:none;
-		text-transform:uppercase;
-	}
-
-	.entry-interaction-links a:hover {
-		background-color:$*gradient_step_fifteen;
-		border-color:$*gradient_step_fifteen;
-		color:$*gradient_step_one;
-	}
-
-	.comment-interaction-links a {
-		background-color:$*gradient_step_ten;
-		border:5px solid;
-		border-color:$*gradient_step_ten;
-		font-family:$*font_base;
-		font-size:$*font_base_size$*font_base_units;
-		font-weight:700;
-		line-height:2em;
-		padding:2px 5px;
-		text-decoration:none;
-		text-transform:uppercase;
-	}
-
-	.comment-interaction-links a:hover {
-		background-color:$*gradient_step_fifteen;
-		border-color:$*gradient_step_fifteen;
-		color:$*gradient_step_one;
-	}
-
-	.above-entry-interaction-links,
-	.below-reply-container {
-		display:none;
-	}
-
-	.comment-wrapper {
-		border:1px solid;
-		$entry_background
-		border-color:$*gradient_step_twelve;
-		margin:0 .5em;
-		padding:1em;
-	}
-
-	.comment-wrapper .userpic img {
-		$userpic_background;
-		float:left;
-		margin:0 1em 1em 0;
-		padding:1em;
-	}
-
-	.comment-poster {
-		color:$*gradient_step_seven;
-		font-family:$*font_base;
-		font-size:.8em;
-		font-style:italic;
-		text-transform:uppercase;
-	}
-
-	.comment-poster a {
-		color:$*gradient_step_four;
-		text-decoration:none;
-	}
-
-	.comment-poster img {
-		-khtml-opacity:0.5;
-		-moz-opacity:0.5;
-		filter:alpha(opacity=50);
-		height:1.5em;
-		opacity:0.5;
-		width:1.5em;
-	}
-
-	.poster-ip {
-		$page_font
-		font-size:.7em;
-		font-style:italic;
-		text-transform:lowercase;
-	}
-
-	.comment-content {
-		$page_font
-		margin-top:1em;
-	}
-
-	.tags-container {
-		margin:3em 1em 0;
-	}
-	
-	/*-----------------------
-	  Single Entry Page
-	  -----------------------*/
-	
-	.page-entry #primary .inner .userpic {
-		margin-top:3.5em;
-		padding-bottom:-3.5em;
-	}
-	
-	/*-----------------------
-	  Entry Reply Page
-	  -----------------------*/
-	
-	.page-reply #primary .inner .userpic {
-		margin-top:3.5em;
-		padding-bottom:-3.5em;
-	}
-
-	.page-entry #primary .inner .comment-wrapper .userpic {
-		margin-top:0;
-	}
-
-	.page-reply #primary .inner .comment-wrapper .userpic {
-		margin-top:0;
-	}
-
-	.page-separator {
-		display:none;
-	}
-	
-	/*-----------------------
-	  First Sidebar (Far Left)
-	  -----------------------*/
-	
-	#secondary {
-		background-color:none;
-		color:$*gradient_step_two;
-		float:left;
-		margin-left:-25em;
-		margin-top:-10em;
-		width:13.2em;
-		z-index:10;
-	}
-
-	#secondary > .inner:first-child {
-		font-family:$*font_base;
-		font-size:.8em;
-	}
-
-	#secondary h2 {
-		background:$*gradient_step_thirteen;
-		color: $*color_accent_two;
-		font-family:$*font_serif;
-		font-size:1.6em;
-		font-style:italic;
-		font-weight:400;
-		line-height:.8em;
-		padding:.5em 0 0 .2em;
-		text-transform:lowercase;
-	}
-
-	#secondary h2 a {
-		color: $*color_accent_two;
-	}
-
-	#secondary .module-wrapper {
-		margin:0;
-		padding:0;
-		width:100%;
-	}
-
-	#secondary .module-content {
-		$module_colors
-		padding:.4em;
-	}
-	
-	/*-----------------------
-	  User Profile Module
-	  -----------------------*/
-	.module-userprofile .userpic img {
-		/*background:#eee url($*image_background_userpic_url) repeat 0 0;*/
-		$userpic_background;
-		border:0;
-		display: block;
-		margin:1em auto;
-		padding:10px;
-		width: 6.25rem;
-		height: 6.25rem;
-	}
-
-	.module-userprofile .journal-name {
-		display:none;
-	}
-
-	.module-userprofile .journal-website-name {
-		display:none;
-	}
-
-	.module-userprofile .userlite-interaction-links {
-		margin:1em 2em;
-	}
-
-	.module-userprofile li {
-		display:inline;
-		padding:0;
-	}
-
-	.module-userprofile li.message {
-		border: 0;
-	}
-	/*-----------------------
-	  Calendar Module
-	  -----------------------*/
-	.module-calendar .module-content {
-		font-family:$*font_base;
-		padding:1em;
-	}
-
-	.module-calendar .module-content table {
-		margin:auto;
-		text-align:center;
-	}
-
-	.module-calendar .module-content .entry-day {
-		background-color:$*gradient_step_six;
-		border:1px solid;
-		border-color:$*gradient_step_seven;
-		color:$*gradient_step_fifteen;
-	}
-
-	.module-calendar .module-content .entry-day a {
-		color:$*gradient_step_fifteen;
-	}
-
-	.module-calendar .module-content .empty-day {
-		background-color:$*gradient_step_eight;
-		border:1px solid;
-		border-color:$*gradient_step_nine;
-		color:$*gradient_step_fifteen;
-	}
-	/*-----------------------
-	  Page Summary Module
-	  -----------------------*/
-	.module-pagesummary .module-list-item {
-		background-color:$*gradient_step_ten;
-		border:1px solid;
-		border-color:$*gradient_step_eleven;
-		margin-bottom:.3em;
-		padding:2px;
-		text-align:center;
-	}
-
-	.module-pagesummary .ljuser {
-		white-space:normal;
-	}
-
-	.module-pagesummary .module-content {
-		word-wrap:break-word;
-	}
-	
-	/*-----------------------
-	  Second Sidebar (Near left)
-	  -----------------------*/
-	#tertiary {
-		background-color:$*gradient_step_ten;
-		color:$*gradient_step_two;
-		float:left;
-		margin-left:-12em;
-		padding-right:1em;
-		width:12.4em;
-	}
-
-	#tertiary > .inner:first-child {
-		font-family:$*font_base;
-		font-size:.8em;
-		padding:1em 0 2em 1.5em;
-	}
-
-	#tertiary h2 {
-		font-family:$*font_serif;
-		font-size:1.6em;
-		font-style:italic;
-		font-weight:400;
-		margin-bottom:-.8em;
-		margin-left:.5em;
-		text-transform:lowercase;
-	}
-
-	#tertiary .module-content {
-		border:1px solid;
-		$entry_background
-		border-color:$*gradient_step_twelve;
-		margin:.3em 0;
-		padding:.5em;
-	}
-
-	#tertiary .module-navlinks {
-		font-family:$*font_base;
-		font-size:1.1em;
-		font-weight:700;
-		margin-bottom:2em;
-		margin-left:-1.5em;
-		margin-top:-1em;
-		position:relative;
-		text-transform:uppercase;
-		width:55em;
-		z-index:1000;
-	}
-
-	#tertiary .module-navlinks .module-content {
-		background:none;
-		border:none;
-		margin:0;
-		padding:0;
-	}
-
-	#tertiary .module-navlinks li {
-		display:inline;
-	}
-
-	#tertiary .module-navlinks li a {
-		background-color:$*gradient_step_fifteen;
-		padding:1em;
-	}
-
-	#tertiary .module-navlinks li a:hover {
-		$module_colors
-	}
-
-	#tertiary .module-tags_multilevel li:hover {
-		background:url($*image_background_header_url) repeat 0 0;
-	}
-
-	#tertiary .module-tags_multilevel li li li:hover {
-		background:url($*image_background_header_url) repeat 0 0;
-	}
-
-	#tertiary .module-tags_multilevel li li:hover {
-		$module_colors
-	}
-
-	#tertiary .module-tags_multilevel li li li li:hover {
-		$module_colors
-	}
-
-	#tertiary .module-tags_multilevel .module-list-item {
-		border:1px solid;
-		$entry_background
-		border-color:$*gradient_step_twelve;
-		margin:.3em 0;
-		padding:.5em;
-	}
-
-	#tertiary .module-tags_multilevel .module-list-item li li li {
-		border:0;
-		margin-left:-1em;
-	}
-
-	#tertiary .module-tags_multilevel a {
-		text-decoration:none;
-	}
-	
-	/*-----------------------
-	  Archive
-	  -----------------------*/
-	#archive-year {
-		padding:0 0 1em;
-	}
-
-	#archive-year .bottomnav {
-		margin-top:-1.2em;
-	}
-
-	.page-archive .month .inner .header {
-		font-family:$*font_base;
-		font-size:2em;
-		height:1.7em;
-		letter-spacing:-.1em;
-		text-align:right;
-		text-transform:lowercase;
-	}
-
-	.page-archive .contents .inner caption {
-		display:none;
-	}
-
-	.page-archive .month th {
-		font-family:$*font_base;
-		font-size:$*font_base_size$*font_base_units;
-		padding:1em;
-	}
-
-	.page-archive .month table {
-		width:100%;
-	}
-
-	.page-archive .month tr {
-		border:1px solid;
-		border-color:$*gradient_step_fifteen;
-	}
-
-	.page-archive .month td.day {
-		$module_colors
-		line-height:3.5em;
-		margin-bottom:10px;
-		padding:.3em;
-		text-align:center;
-	}
-
-	.page-archive .month td.day-has-entries {
-		line-height:.55em;
-		padding:.3em;
-	}
-
-	#archive-month {
-		padding:2.8em 1em 2em;
-	}
-
-	#archive-month .navigation form {
-		border:0;
-	}
-
-	#archive-month .navigation input {
-		$module_colors
-		border:1px solid;
-		border-color:$*gradient_step_fourteen;
-		color:$*gradient_step_one;
-		font-family:$*font_base;
-		font-size:.9em;
-	}
-
-	#archive-month .navigation input .hidden {
-		display:none;
-	}
-
-	#archive-month .navigation select {
-		$module_colors
-		border:1px solid;
-		border-color:$*gradient_step_fourteen;
-		color:$*gradient_step_one;
-		font-family:$*font_base;
-		font-size:.9em;
-	}
-
-	#archive-month .navigation option {
-		$module_colors
-		color:$*gradient_step_one;
-		font-family:$*font_base;
-		font-size:.9em;
-	}
-
-	#archive-month .topnav {
-		margin:-8.4em -2em 0 0;
-	}
-
-	#archive-month .navigation ul {
-		display:inline;
-	}
-
-	#archive-month .navigation li {
-		display:inline;
-	}
-
-	#archive-month .month {
-		margin-bottom:3em;
-	}
-
-	#archive-month .bottomnav {
-		margin:-2em -2em 0 0;
-	}
-
-	#archive-month dt {
-		font-family:$*font_base;
-		font-size:$*font_base_size$*font_base_units;
-		font-weight:700;
-		letter-spacing:.2em;
-	}
-
-	#archive-month dt a {
-		background:#292929;
-		color: $*color_accent_one;
-		font-size:2em;
-		letter-spacing:-.15em;
-		padding:0 .5em .5em;
-		text-transform:uppercase;
-	}
-
-	#archive-month .entry-title {
-		font-family:$*font_serif;
-		font-size:1.5em;
-		font-style:italic;
-		font-weight:400;
-		margin:0;
-		text-align:left;
-		text-transform:lowercase;
-	}
-
-	#archive-month .datetime {
-		color:$*gradient_step_six;
-		float:left;
-	}
-
-	#archive-month dd {
-		background:$*gradient_step_twelve;
-		margin:-2.5em 0 1em 1em;
-		padding:4.5em 1em 1em;
-	}
-
-	#archive-day .navigation .topnav {
-		float:right;
-		margin-right:-9em;
-		margin-top:-2.5em;
-		position:relative;
-	}
-
-	#archive-day .day-date {
-		display:none;
-	}
-	
-	/*-----------------------
-	  Small Screens
-	  -----------------------*/
-	@media screen and (max-width:800px) {
-		body{
+	/*----------------------------------------------
+	  BASE STYLES
+	  ----------------------------------------------*/
+
+		body {
+			padding-left:17em;
+			padding-top:0;
+			$page_font
+			margin-top:0;
+			$page_background
+			$page_colors
 		}
-	}
+
+		#canvas img {
+			border:none;
+		}
+
+		#canvas hr {
+			display:none;
+		}
+
+		#canvas q {
+			font-style:italic;
+		}
+
+		#canvas i {
+			color: $*color_accent_one;
+			font-family:$*font_entry_title;
+			font-style:italic;
+		}
+
+		#canvas em {
+			color: $*color_accent_one;
+			font-family:$*font_entry_title;
+			font-style:italic;
+		}
+
+		#canvas b {
+			color: $*color_accent_two;
+			font-weight:700;
+		}
+
+		#canvas strong {
+			color: $*color_accent_two;
+			font-weight:700;
+		}
+
+		#canvas ul {
+			list-style:none;
+			padding:0 .5em;
+		}
+
+		#canvas ul li li {
+			margin-left:.5em;
+		}
+
+		#canvas a {
+			$page_link_colors
+			text-decoration:none;
+		}
+
+		#canvas a b {
+			$page_link_colors
+			$page_font
+		}
+
+		#canvas a i {
+			$page_font
+		}
+
+		#canvas a:hover {
+			$page_link_hover_colors
+			text-decoration:none;
+		}
+
+		#canvas a:hover b {
+			$page_link_hover_colors
+		}
+
+		#canvas a:visited {
+			$page_link_visited_colors
+			text-decoration:none;
+		}
+
+		#canvas a:active {
+			$page_link_active_colors
+			text-decoration:none;
+		}
+
+		#canvas select {
+			background:$*gradient_step_ten;
+			border:1px solid $*gradient_step_thirteen;
+			color:$*gradient_step_six;
+			font-family:$*font_entry_title;
+			font-size:$*font_base_size$*font_base_units;
+			font-style:italic;
+		}
+
+		#canvas option {
+			background:$*gradient_step_ten;
+			border:1px solid $*gradient_step_thirteen;
+			color:$*gradient_step_six;
+			font-family:$*font_entry_title;
+			font-size:$*font_base_size$*font_base_units;
+			font-style:italic;
+		}
+
+		#canvas input {
+			background:$*gradient_step_ten;
+			border:1px solid $*gradient_step_thirteen;
+			color:$*gradient_step_six;
+			font-family:$*font_entry_title;
+			font-size:$*font_base_size$*font_base_units;
+			font-style:italic;
+		}
+
+		#canvas textarea {
+			background:$*gradient_step_ten;
+			border:1px solid $*gradient_step_thirteen;
+			color:$*gradient_step_six;
+			font-family:$*font_entry_title;
+			font-size:$*font_base_size$*font_base_units;
+		}
+
+		#canvas blockquote {
+			$userpic_background
+			background-position: -5em -5em;
+			background-color: $*gradient_step_ten;
+			display:inline-block;
+			font-family:$*font_serif;
+			font-style:italic;
+			padding:1em 1em 1em 5em;
+		}
+
+		.entry .contents img,
+		iframe,
+		iframe #document iframe {
+			max-width:100%;
+		}
+
+	/*----------------------------------------------
+	  STRUCTURE
+	  ----------------------------------------------*/
+
+		#canvas {
+			border:none;
+			padding-left:10em;
+			width:70%;
+			z-index:5;
+		}
+
+		/*-----------------------
+		  Header & Footer
+		  -----------------------*/
+
+		#header,
+		#footer {
+			clear: both;
+			padding: .5em;
+			text-transform: lowercase;
+		}
+
+		#header {
+			$header_background
+			$page_title_colors
+			position:relative;
+			margin:0 5em 0 -12em;
+			z-index:15;
+		}
+
+		h1#title {
+			$page_title_font
+			line-height: .6em;
+			margin-top:.5em;
+			-ms-word-break: break-all;
+			word-break: break-all;
+			word-break: break-word;
+			-o-hyphens: auto;
+			-ms-hyphens: auto;
+			-moz-hyphens: auto;
+			-webkit-hyphens: auto;
+			hyphens: auto;
+		}
+
+		h2#subtitle {
+			margin:0;
+			padding-left:2em;
+			$page_subtitle_font
+			font-weight:normal;
+			position:relative;
+			top:-3.5em;
+		}
+
+		h2#pagetitle {
+			margin-left:auto;
+			margin-top:-1.5em;
+			position:relative;
+			z-index:15;
+		}
+
+		.page-entry h2#pagetitle {
+			visibility:hidden;
+		}
+
+		#footer {
+			$footer_background
+			text-align:right;
+			margin:0 5em 0 0;
+		}
+
+		#footer a {
+			font-weight:700;
+			text-decoration:none;
+		}
+
+		#footer a:visited {
+			font-weight:700;
+			text-decoration:none;
+		}
+
+		#footer a:active {
+			font-weight:700;
+			text-decoration:none;
+		}
+
+		#primary {
+			background-color:none;
+			float:left;
+			margin-right:-100%;
+			width:100%;
+		}
+
+		#primary > .inner:first-child {
+			background-color:$*gradient_step_ten;
+			margin-right:5em;
+			padding:1em 1em 2em;
+		}
+
+		/*-----------------------
+		  Navigation
+		  -----------------------*/
+
+		.topnav {
+			float:right;
+			margin-right:-1.5em;
+			margin-top:-7.3em;
+			position:relative;
+			text-transform:uppercase;
+			z-index:50;
+		}
+
+		.bottomnav {
+			float:right;
+			margin-bottom:-1em;
+			margin-right:-1.5em;
+			margin-top:-2.2em;
+			padding-top:1em;
+			text-transform:uppercase;
+		}
+
+		.navigation li {
+			display:inline;
+			$entry_background
+			padding:.5em;
+			font-size:.8em;
+		}
+
+		.navigation .page-separator {
+			display:none;
+		}
+
+		.navigation a {
+			text-decoration:none;
+		}
+
+		.navigation a:visited {
+			text-decoration:none;
+		}
+
+		.navigation a:hover {
+			text-decoration:none;
+		}
+
+		.navigation a:active {
+			text-decoration:none;
+		}
+
+		/*-----------------------
+		  Entries & Comments
+		  -----------------------*/
+
+		#entries {
+			margin:3.2em 0 0;
+		}
+
+		.entry-wrapper {
+			background-color:none;
+			margin:2em 0 2.5em -1em;
+			padding-left:1em;
+		}
+
+		.entry {
+			$page_font
+			margin:0 .5em -1em;
+			padding:.1em 1em;
+			position:relative;
+			z-index:0;
+			$entry_background
+			$entry_colors
+			-ms-word-break: break-all;
+			word-break: break-all;
+			word-break: break-word;
+			-o-hyphens: auto;
+			-ms-hyphens: auto;
+			-moz-hyphens: auto;
+			-webkit-hyphens: auto;
+			hyphens: auto;
+		}
+
+		.entry-title {
+			line-height:.6em;
+			margin-bottom:0;
+			text-align:right;
+			text-transform:lowercase;
+			$entry_title_font
+			$entry_title_colors
+			font-style: italic;
+			font-weight: 400;
+		}
+
+		.entry-title a {
+			text-decoration:none;
+		}
+
+		.entry-title a:visited {
+			text-decoration:none;
+		}
+
+		.entry-title a:active {
+			text-decoration:none;
+		}
+
+		.entry-title a:hover {
+			text-decoration:none;
+		}
+
+		.datetime {
+			color: $*color_accent_one;
+			float:right;
+			font-size:$*font_base_size$*font_base_units;
+			font-style:italic;
+			text-transform:lowercase;
+		}
+
+		.edittime .datetime {
+			float:none;
+		}
+
+		.entry-content hr,
+		.comment-content hr {
+			display:block;
+			margin:1em 10%;
+		}
+
+		.entry-content {
+			font-size:$*font_base_size$*font_base_units;
+			margin-bottom:-2em;
+			margin-top:2em;
+		}
+
+		.entry-poster {
+			color:$*gradient_step_seven;
+			float:left;
+			font-family:$*font_base;
+			font-size:.8em;
+			font-style:italic;
+			margin-bottom:.8em;
+			margin-left:-1.5em;
+			margin-top:-1.5em;
+			padding:0 1em;
+			text-transform:uppercase;
+			width:100%;
+		}
+
+		.entry-poster a {
+			text-decoration:none;
+		}
+
+		.entry-poster a b {
+			color:$*gradient_step_four;
+			font-family:$*font_base;
+		}
+
+		.entry-poster img {
+			-khtml-opacity:0.5;
+			-moz-opacity:0.5;
+			filter:alpha(opacity=50);
+			height:1.5em;
+			opacity:0.5;
+			width:1.5em;
+		}
+
+		.entry ul {
+			list-style:circle outside;
+			padding:0 2em;
+		}
+
+		.entry ol {
+			list-style:decimal-leading-zero inside;
+			padding:0 .5em;
+		}
+
+		.entry ul li li {
+			background:none;
+			margin-left:.5em;
+		}
+
+		.entry-wrapper .userpic {
+			background: $*gradient_step_thirteen;
+			float: right;
+			padding: 1em;
+			position: relative;
+			margin: -2.65em -8.5em 0 0;
+		}
+
+		.entry-wrapper .userpic img {
+			max-height:5.5em;
+			max-width:5.5em;
+		}
+
+		.metatypes {
+			float:right;
+			margin-top:-1.75em;
+		}
+
+		.metadata {
+			margin-bottom:-3em;
+			margin-top:3em;
+		}
+
+		.metadata-label {
+			font-family:$*font_base;
+			font-size:.9em;
+			font-weight:700;
+			margin:0;
+			text-transform:lowercase;
+		}
+
+		.metadata ul {
+			border-top:1px solid $*gradient_step_ten;
+			margin:0;
+			padding:0;
+		}
+
+		.metadata li {
+			list-style: none;
+			border-bottom:1px solid $*gradient_step_ten;
+			min-height:2em;
+			padding-top:.3em;
+		}
+
+		.metadata-item {
+			color:$*gradient_step_six;
+			font-family:$*font_serif;
+			font-size:1.4em;
+			font-style:italic;
+			text-transform:lowercase;
+		}
+
+		.metadata-item-xpost {
+			word-wrap: break-word;
+		}
+
+		.metadata li + li + li {
+			border-bottom:1px solid $*gradient_step_ten;
+		}
+
+		.metadata li + li {
+			border-bottom:1px solid $*gradient_step_ten;
+		}
+
+		.metadata li + li + li + li {
+			border-bottom:1px solid $*gradient_step_ten;
+		}
+
+		.metadata-item a {
+			text-decoration:none;
+		}
+
+		.metadata-item a:visited {
+			text-decoration:none;
+		}
+
+		.metadata-item a:active {
+			text-decoration:none;
+		}
+
+		.metadata-item a:hover {
+			text-decoration:none;
+		}
+
+		.metadata-label-mood {
+			display:none;
+		}
+
+		.metadata-item-mood {
+			float:right;
+		}
+
+		.footer {
+			padding-top:3em;
+			text-align:right;
+		}
+
+		.comment-management-links ul,
+		.entry-management-links ul,
+		.tag ul,
+		.entry-interaction-links ul,
+		.comment-interaction-links ul {
+			margin-left:0;
+			padding-left:0;
+		}
+
+		.comment-management-links li,
+		.entry-management-links li,
+		.tag li,
+		.entry-interaction-links li,
+		.comment-interaction-links li {
+			display:inline;
+		}
+
+		.tag-text {
+			display:none;
+		}
+
+		.tag a {
+			text-decoration:none;
+		}
+
+		.bottomcomment {
+			margin-left:1em;
+		}
+
+		.entry-interaction-links a {
+			background-color:$*gradient_step_ten;
+			border:5px solid;
+			border-color:$*gradient_step_ten;
+			font-family:$*font_base;
+			font-size:1.1em;
+			font-weight:700;
+			line-height:2em;
+			padding:2px 5px;
+			text-decoration:none;
+			text-transform:uppercase;
+		}
+
+		.entry-interaction-links a:hover {
+			background-color:$*gradient_step_fifteen;
+			border-color:$*gradient_step_fifteen;
+			color:$*gradient_step_one;
+		}
+
+		.comment-interaction-links a {
+			background-color:$*gradient_step_ten;
+			border:5px solid;
+			border-color:$*gradient_step_ten;
+			font-family:$*font_base;
+			font-size:$*font_base_size$*font_base_units;
+			font-weight:700;
+			line-height:2em;
+			padding:2px 5px;
+			text-decoration:none;
+			text-transform:uppercase;
+		}
+
+		.comment-interaction-links a:hover {
+			background-color:$*gradient_step_fifteen;
+			border-color:$*gradient_step_fifteen;
+			color:$*gradient_step_one;
+		}
+
+		.above-entry-interaction-links,
+		.below-reply-container {
+			display:none;
+		}
+
+		.comment-wrapper {
+			border:1px solid;
+			$entry_background
+			border-color:$*gradient_step_twelve;
+			margin:0 .5em;
+			padding:1em;
+		}
+
+		.comment-wrapper .userpic img {
+			$userpic_background;
+			float:left;
+			margin:0 1em 1em 0;
+			padding:1em;
+		}
+
+		.comment-poster {
+			color:$*gradient_step_seven;
+			font-family:$*font_base;
+			font-size:.8em;
+			font-style:italic;
+			text-transform:uppercase;
+		}
+
+		.comment-poster a {
+			color:$*gradient_step_four;
+			text-decoration:none;
+		}
+
+		.comment-poster img {
+			-khtml-opacity:0.5;
+			-moz-opacity:0.5;
+			filter:alpha(opacity=50);
+			height:1.5em;
+			opacity:0.5;
+			width:1.5em;
+		}
+
+		.poster-ip {
+			$page_font
+			font-size:.7em;
+			font-style:italic;
+			text-transform:lowercase;
+		}
+
+		.comment-content {
+			$page_font
+			margin-top:1em;
+		}
+
+		.tags-container {
+			margin:3em 1em 0;
+		}
+
+		/*-----------------------
+		  Single Entry Page
+		  -----------------------*/
+
+		.page-entry #primary .inner .userpic {
+			margin-top:3.5em;
+			padding-bottom:-3.5em;
+		}
+
+		/*-----------------------
+		  Entry Reply Page
+		  -----------------------*/
+
+		.page-reply #primary .inner .userpic {
+			margin-top:3.5em;
+			padding-bottom:-3.5em;
+		}
+
+		.page-entry #primary .inner .comment-wrapper .userpic {
+			margin-top:0;
+		}
+
+		.page-reply #primary .inner .comment-wrapper .userpic {
+			margin-top:0;
+		}
+
+		.page-separator {
+			display:none;
+		}
+
+		/*-----------------------
+		  First Sidebar (Far Left)
+		  -----------------------*/
+
+		#secondary {
+			background-color:none;
+			color:$*gradient_step_two;
+			float:left;
+			margin-left:-25em;
+			margin-top:-10em;
+			width:13.2em;
+			z-index:10;
+		}
+
+		#secondary > .inner:first-child {
+			font-family:$*font_base;
+			font-size:.8em;
+		}
+
+		#secondary h2 {
+			background:$*gradient_step_thirteen;
+			color: $*color_accent_two;
+			font-family:$*font_serif;
+			font-size:1.6em;
+			font-style:italic;
+			font-weight:400;
+			line-height:.8em;
+			padding:.5em 0 0 .2em;
+			text-transform:lowercase;
+		}
+
+		#secondary h2 a {
+			color: $*color_accent_two;
+		}
+
+		#secondary .module-wrapper {
+			margin:0;
+			padding:0;
+			width:100%;
+		}
+
+		#secondary .module-content {
+			$module_colors
+			padding:.4em;
+		}
+
+		/*-----------------------
+		  User Profile Module
+		  -----------------------*/
+		.module-userprofile .userpic img {
+			/*background:#eee url($*image_background_userpic_url) repeat 0 0;*/
+			$userpic_background;
+			border:0;
+			display: block;
+			margin:1em auto;
+			padding:10px;
+			width: 6.25rem;
+			height: 6.25rem;
+		}
+
+		.module-userprofile .journal-name {
+			display:none;
+		}
+
+		.module-userprofile .journal-website-name {
+			display:none;
+		}
+
+		.module-userprofile .userlite-interaction-links {
+			margin:1em 2em;
+		}
+
+		.module-userprofile li {
+			display:inline;
+			padding:0;
+		}
+
+		.module-userprofile li.message {
+			border: 0;
+		}
+		/*-----------------------
+		  Calendar Module
+		  -----------------------*/
+		.module-calendar .module-content {
+			font-family:$*font_base;
+			padding:1em;
+		}
+
+		.module-calendar .module-content table {
+			margin:auto;
+			text-align:center;
+		}
+
+		.module-calendar .module-content .entry-day {
+			background-color:$*gradient_step_six;
+			border:1px solid;
+			border-color:$*gradient_step_seven;
+			color:$*gradient_step_fifteen;
+		}
+
+		.module-calendar .module-content .entry-day a {
+			color:$*gradient_step_fifteen;
+		}
+
+		.module-calendar .module-content .empty-day {
+			background-color:$*gradient_step_eight;
+			border:1px solid;
+			border-color:$*gradient_step_nine;
+			color:$*gradient_step_fifteen;
+		}
+		/*-----------------------
+		  Page Summary Module
+		  -----------------------*/
+		.module-pagesummary .ljuser {
+			white-space:normal;
+		}
+
+		.module-pagesummary .module-content {
+			word-wrap:break-word;
+		}
+
+		#tertiary .module-pagesummary .module-list-item {
+			background-color:$*gradient_step_ten;
+			border:1px solid;
+			border-color:$*gradient_step_eleven;
+			margin-bottom:.3em;
+			padding:2px;
+			text-align:center;
+		}
+
+		/*-----------------------
+		  Second Sidebar (Near left)
+		  -----------------------*/
+		#tertiary {
+			background-color:$*gradient_step_ten;
+			color:$*gradient_step_two;
+			float:left;
+			padding: 2.8em 0 0;
+			margin: 0 0 0 -12em;
+			width:12.4em;
+		}
+
+		#tertiary > .inner:first-child {
+			font-family:$*font_base;
+			font-size:.8em;
+			padding:1em 0 2em 1.5em;
+		}
+
+		#tertiary h2 {
+			font-family:$*font_serif;
+			font-size:1.6em;
+			font-style:italic;
+			font-weight:400;
+			margin: 0 0 -.8em .5em;
+			text-transform:lowercase;
+		}
+
+		#tertiary .module-content {
+			border:1px solid;
+			$entry_background
+			border-color:$*gradient_step_twelve;
+			margin:.3em 0;
+			padding:.5em;
+		}
+
+		#header .module-navlinks {
+			font-family:$*font_base;
+			font-size: .8em;
+			font-weight:700;
+			margin: -.5em 0 0;
+			position: absolute;
+			text-transform:uppercase;
+			width:100%;
+			z-index:1000;
+		}
+
+		#header .module-navlinks .module-content {
+			background:none;
+			border:none;
+			margin:0;
+			padding:0;
+		}
+
+		#header .module-navlinks li {
+			display:inline;
+			line-height: 3.25em;
+		}
+
+		#header .module-navlinks li a {
+			background-color:$*gradient_step_fifteen;
+			padding:1em;
+		}
+
+		#header .module-navlinks li a:hover {
+			$module_colors
+		}
+
+		#tertiary .module-tags_multilevel a {
+			text-decoration:none;
+		}
+
+		#tertiary .module-tags_multilevel li:hover,
+		#tertiary .module-tags_multilevel li li li:hover {
+			background:url($*image_background_header_url) repeat 0 0;
+		}
+
+		#tertiary .module-tags_multilevel li li:hover,
+		#tertiary .module-tags_multilevel li li li li:hover {
+			$module_colors
+		}
+
+		#tertiary .module-tags_multilevel .module-list-item li li li {
+			border:0;
+			margin-left:-1em;
+		}
+
+		#tertiary .module-tags_multilevel .module-list-item {
+			border:1px solid;
+			$entry_background
+			border-color:$*gradient_step_twelve;
+			margin:.3em 0;
+			padding:.5em;
+		}
+
+		/*-----------------------
+		  Archive
+		  -----------------------*/
+		#archive-year {
+			padding:0 0 1em;
+		}
+
+		#archive-year .bottomnav {
+			margin-top:-1.2em;
+		}
+
+		.page-archive .month .inner .header {
+			font-family:$*font_base;
+			font-size:2em;
+			height:1.7em;
+			letter-spacing:-.1em;
+			text-align:right;
+			text-transform:lowercase;
+		}
+
+		.page-archive .contents .inner caption {
+			display:none;
+		}
+
+		.page-archive .month th {
+			font-family:$*font_base;
+			font-size:$*font_base_size$*font_base_units;
+			padding:1em;
+		}
+
+		.page-archive .month table {
+			width:100%;
+		}
+
+		.page-archive .month tr {
+			border:1px solid;
+			border-color:$*gradient_step_fifteen;
+		}
+
+		.page-archive .month td.day {
+			$module_colors
+			line-height:3.5em;
+			margin-bottom:10px;
+			padding:.3em;
+			text-align:center;
+		}
+
+		.page-archive .month td.day-has-entries {
+			line-height:.55em;
+			padding:.3em;
+		}
+
+		#archive-month {
+			padding:2.8em 1em 2em;
+		}
+
+		#archive-month .navigation form {
+			border:0;
+		}
+
+		#archive-month .navigation input {
+			$module_colors
+			border:1px solid;
+			border-color:$*gradient_step_fourteen;
+			color:$*gradient_step_one;
+			font-family:$*font_base;
+			font-size:.9em;
+		}
+
+		#archive-month .navigation input .hidden {
+			display:none;
+		}
+
+		#archive-month .navigation select {
+			$module_colors
+			border:1px solid;
+			border-color:$*gradient_step_fourteen;
+			color:$*gradient_step_one;
+			font-family:$*font_base;
+			font-size:.9em;
+		}
+
+		#archive-month .navigation option {
+			$module_colors
+			color:$*gradient_step_one;
+			font-family:$*font_base;
+			font-size:.9em;
+		}
+
+		#archive-month .topnav {
+			margin:-8.4em -2em 0 0;
+		}
+
+		#archive-month .navigation ul {
+			display:inline;
+		}
+
+		#archive-month .navigation li {
+			display:inline;
+		}
+
+		#archive-month .month {
+			margin-bottom:3em;
+		}
+
+		#archive-month .bottomnav {
+			margin:-2em -2em 0 0;
+		}
+
+		#archive-month dt {
+			font-family:$*font_base;
+			font-size:$*font_base_size$*font_base_units;
+			font-weight:700;
+			letter-spacing:.2em;
+		}
+
+		#archive-month dt a {
+			background:#292929;
+			color: $*color_accent_one;
+			font-size:2em;
+			letter-spacing:-.15em;
+			padding:0 .5em .5em;
+			text-transform:uppercase;
+		}
+
+		#archive-month .entry-title {
+			font-family:$*font_serif;
+			font-size:1.5em;
+			font-style:italic;
+			font-weight:400;
+			margin:0;
+			text-align:left;
+			text-transform:lowercase;
+		}
+
+		#archive-month .datetime {
+			color:$*gradient_step_six;
+			float:left;
+		}
+
+		#archive-month dd {
+			background:$*gradient_step_twelve;
+			margin:-2.5em 0 1em 1em;
+			padding:4.5em 1em 1em;
+		}
+
+		#archive-day .navigation .topnav {
+			float:right;
+			margin-right:-9em;
+			margin-top:-2.5em;
+			position:relative;
+		}
+
+		#archive-day .day-date {
+			display:none;
+		}
+
+		/*-----------------------
+		  Small Screens
+		  -----------------------*/
+		@media only screen and (max-width:1000px) {
+			html body {
+				margin: 0 8px;
+			}
+			body {
+				padding-left: 0;
+			}
+			#canvas {
+				padding: 0;
+				width: auto;
+			}
+			#header {
+				margin: auto;
+			}
+			h1#title {
+				font-size: 8em;
+			}
+			#primary,
+			#secondary,
+			#tertiary {
+				float: none;
+				margin: 0;
+				overflow: hidden;
+			}
+			#primary > .inner:first-child {
+				margin-right: 0;
+				padding-right: 8em;
+			}
+			#secondary,
+			#tertiary {
+				width: 100%;
+			}
+			#secondary .inner,
+			#tertiary .inner {
+				width: 95%;
+				margin: 0 auto;
+			}
+			#secondary .module,
+			#tertiary .module {
+				width: 31%;
+				float: left;
+				margin: 0 .5em;
+			}
+			#tertiary > .inner:first-child {
+				padding: 0;
+			}
+			#footer {
+				margin: auto;
+			}
+		}	
+		@media only screen and (max-width:800px) {
+			h1#title {
+				font-size: 4em;
+			}
+			h2#pagetitle {
+				font-size: 1em;
+			}
+		}
+		@media only screen and (max-width:630px) {
+			#secondary .inner,
+			#tertiary .inner {
+				width: auto;
+			}
+			#secondary .module,
+			#tertiary .module {
+				width: 100%;
+				margin: 0;
+			}
+		}
     """;
 
 }
 
+# Add section for navlinks module
+function Page::print()
+"The meat of each new layout. Describes how each page will look. In nearly all cases, the logic and decision-making processes should come from pre-existing functions in core2, and should not get written here. If you limit the structure of the page to HTML, function calls, and attached CSS, then you will be able to pick up all of the enhancements  and accessibility requirements managed by core2."
+{
+    """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head profile="http://www.w3.org/2006/03/hcard http://purl.org/uF/hAtom/0.1/ http://gmpg.org/xfn/11">\n""";
+    $this->print_head();
+    $this->print_stylesheets();
+    $this->print_head_title();
+    """</head>""";
+    $this->print_wrapper_start();
+    $this->print_control_strip();
+    """
+    <div id="canvas">
+        <div class="inner">
+            <div id="header">
+                <div class="inner">
+                    """;
+                    $this->print_global_title();
+                    $this->print_global_subtitle();
+                    $this->print_title();
+                    $this->print_module_section("header");
+    """
+                </div><!-- end header>inner -->
+            </div><!-- end header -->
+            <div id="content">
+                <div class="inner">
+    """;
+                if ($*layout_type == "one-column-split") {
+    """
+                    <div id="secondary"><div class="inner">
+    """;
+                        $this->print_module_section("one");
+    """
+                    </div></div><!--  end secondary and secondary>inner -->
+    """;
+                }
+    """
+                    <div id="primary"><div class="inner">
+                        """;
+                        $this->print_body();
+    """
+                    </div></div><!-- end primary and primary>inner -->
+    """;
+                if ($*layout_type != "one-column-split") {
+    """
+                    <div id="secondary"><div class="inner">
+    """;
+                        $this->print_module_section("one");
+    """
+                    </div></div><!--  end secondary and secondary>inner -->
+    """;
+                }
+    """
+                    <div id="invisible-separator" style="float: left; width: 1px;"></div> <!-- this is a hack for IE7 + two-columns-right -->
+                    <div id="tertiary"><div class="inner">
+                        """;
+                        $this->print_module_section("two");
+    """
+                    </div></div><!-- end tertiary and tertiary>inner -->
+                    <div id="content-footer"></div>
+                </div><!-- end content>inner -->
+            </div> <!-- end content -->
+        </div> <!-- end canvas>inner -->
+    """;
+
+    """
+    <div id="footer">
+        <div class="inner">
+            """;
+            print safe """
+                <div class="page-top"><a href="#">$*text_page_top</a></div>
+        </div><!-- end footer>inner -->
+    </div><!-- end footer -->
+
+    </div> <!-- end canvas -->
+    """;
+    $this->print_wrapper_end();
+    """</html>""";
+}
+
+#Not sure what I was doing with this one...
 function Page::print_entry(Entry e) 
 "The meat of each new layout. Describes how each page will look. In nearly all cases, the logic and decision-making processes should come from pre-existing functions in core2, and should not get written here. If you limit the structure of the page to HTML, function calls, and attached CSS, then you will be able to pick up all of the enhancements  and accessibility requirements managed by core2."
 {
