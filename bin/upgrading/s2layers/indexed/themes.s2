@@ -16,7 +16,7 @@ set color_page_link = "#fff";
 set color_page_link_active = "#ccc";
 set color_page_link_hover = "#95e2cf";
 set color_page_link_visited = "";
-set color_page_border = "";
+set color_page_border = "#333333";
 set color_page_title = "#000";
 
 ##===============================
@@ -24,6 +24,8 @@ set color_page_title = "#000";
 ##===============================
 
 set color_header_background = "#313131";
+set color_header_link = "#000000";
+set color_header_link_hover = "#222222";
 set color_footer_background = "#313131";
 set color_footer_link = "#fff";
 set color_footer_link_active = "#fff";
@@ -36,34 +38,28 @@ set color_footer_link_visited = "#fff";
 
 set color_entry_background = "#444";
 set color_entry_text = "";
-set color_entry_link = "#fff";
+set color_entry_link = "#333333";
 set color_entry_link_active = "#ccc";
-set color_entry_link_hover = "#95e2cf";
+set color_entry_link_hover = "#000000";
 set color_entry_link_visited = "";
-set color_entry_border = "";
+set color_entry_border = "#333333";
 set color_entry_title = "";
 set color_entry_title_background = "";
 set color_entry_interaction_links = "";
 
 ##===============================
-## Comment Colors
-##===============================
-
-set color_comment_title_background = "";
-
-##===============================
 ## Module Colors
 ##===============================
 
-set color_module_background = "#222";
-set color_module_text = "";
-set color_module_link = "";
-set color_module_link_active = "";
-set color_module_link_hover = "";
-set color_module_link_visited = "";
-set color_module_title = "";
-set color_module_title_background = "";
-set color_module_border = "";
+set color_module_background = "#333333";
+set color_module_text = "#bbbbbb";
+set color_module_link = "#999";
+set color_module_link_active = "#cccccc";
+set color_module_link_hover = "#808959";
+set color_module_link_visited = "#dddddd";
+set color_module_title = "#808959";
+set color_module_title_background = "#222222";
+set color_module_border = "#303030";
 
 ##===============================
 ## Accent Colors
@@ -73,20 +69,10 @@ set color_accent_one = "#c8e686";
 set color_accent_two = "#808959";
 set color_accent_three = "#95e2cf";
 set gradient_step_six = "#777";
-set gradient_step_seven = "#666";
-set gradient_step_eight = "#555";
-set gradient_step_nine = "#444";
-set gradient_step_ten = "#333";
-set gradient_step_thirteen = "#222";
-set gradient_step_fourteen = "#111";
-set gradient_step_fifteen = "#000";
-set gradient_step_four = "#888";
-set gradient_step_one = "#fff";
-set gradient_step_twelve = "#303030";
-set gradient_step_two = "#bbb";
-set gradient_step_eleven = "#323232";
-set gradient_step_three = "#9B9B9B";
-set gradient_step_five = "#848484";
+
+set color_page_link = "#fff";
+set color_sidebar_background = "#222222";
+set color_userpic_background = "#222222";
 
 ##===============================
 ## Images
@@ -95,4 +81,3 @@ set gradient_step_five = "#848484";
 set image_background_header_url = "indexed/spotcolor_header_bg.png";
 set image_background_userpic_url = "indexed/spotcolor_userpic_bg.png";
 set image_background_userpic_repeat = "repeat-y";
-set color_userpic_background = "#eee";

@@ -48,6 +48,10 @@ propgroup colors {
     property use color_page_title;
     
     property use color_header_background;
+    property use color_header_link;
+    property use color_header_link_active;
+    property use color_header_link_hover;
+    property use color_header_link_visited;
     property use color_footer_background;
     property use color_footer_link;
     property use color_footer_link_active;
@@ -74,8 +78,6 @@ propgroup colors {
     property use color_entry_title;
     property use color_entry_title_background;
     property use color_entry_interaction_links;
-    
-    property use color_comment_title_background;
 }
 
 propgroup colors_child {
@@ -84,29 +86,28 @@ propgroup colors_child {
         des = "Userpic background color";
         note ="Leave blank for transparency.";
     }
+    property Color color_sidebar_background {
+        des = "Sidebar background color";
+        note = "";
+    }
+
+    property Color color_accent_one { 
+des = "First Accent Color"; 
+note = "";
+}
+    property Color color_accent_two { 
+des = "Second Accent Color"; 
+note = "";
 }
 
-propgroup simplecolors = "Simple Colors";
-propgroup simplecolors {
-
-    property Color color_accent_one { des = "First Accent Color"; }
-    property Color color_accent_two { des = "Second Accent Color"; }
-    property Color color_accent_three { des = "Third Accent Color"; }
-    property Color gradient_step_one { des = "Gradient - Step One (Lightest)"; }
-    property Color gradient_step_two { des = "Gradient - Step Two"; }
-    property Color gradient_step_three { des = "Gradient - Step Three"; }
-    property Color gradient_step_four { des = "Gradient - Step Four"; }
-    property Color gradient_step_five { des = "Gradient - Step Five"; }
-    property Color gradient_step_six { des = "Gradient - Step Six"; }
-    property Color gradient_step_seven { des = "Gradient - Step Seven"; }
-    property Color gradient_step_eight { des = "Gradient - Step Eight"; }
-    property Color gradient_step_nine { des = "Gradient - Step Nine"; }
-    property Color gradient_step_ten { des = "Gradient - Step Ten"; }
-    property Color gradient_step_eleven { des = "Gradient - Step Eleven"; }
-    property Color gradient_step_twelve { des = "Gradient - Step Twelve"; }
-    property Color gradient_step_thirteen { des = "Gradient - Step Thirteen"; }
-    property Color gradient_step_fourteen { des = "Gradient - Step Fourteen"; }
-    property Color gradient_step_fifteen { des = "Gradient - Step Fifteen"; }
+    property Color color_accent_three { 
+des = "Third Accent Color"; 
+note = "";
+}
+    property Color gradient_step_six { 
+des = "Gradient - Step Six"; 
+note = "metadata text color";
+}
 }
 
 
@@ -316,7 +317,7 @@ function Page::print_default_stylesheet() {
 
     var string entry_background = generate_background_css ($*image_background_entry_url, $*image_background_entry_repeat, $*image_background_entry_position, $*color_entry_background);
     var string module_background = generate_background_css ($*image_background_module_url, $*image_background_module_repeat, $*image_background_module_position, $*color_module_background);
-    var string userpic_background = generate_background_css( $*image_background_userpic_url, $*image_background_userpic_repeat, $*image_background_userpic_position, $*color_userpic_background);
+    var string userpic_background = generate_background_css( $*image_background_userpic_url, $*image_background_userpic_repeat, $*image_background_userpic_position, $*color_accent_one);
 
     var string page_colors = generate_color_css($*color_page_text, $*color_page_background, $*color_page_border);
     var string entry_colors = generate_color_css($*color_entry_text, $*color_entry_background, $*color_entry_border);
@@ -441,36 +442,36 @@ function Page::print_default_stylesheet() {
 		}
 
 		#canvas select {
-			background:$*gradient_step_ten;
-			border:1px solid $*gradient_step_thirteen;
-			color:$*gradient_step_six;
+			background:$*color_page_background;
+			border:1px solid $*color_page_border;
+			color:$*color_page_text;
 			font-family:$*font_entry_title;
 			font-size:$*font_base_size$*font_base_units;
 			font-style:italic;
 		}
 
 		#canvas option {
-			background:$*gradient_step_ten;
-			border:1px solid $*gradient_step_thirteen;
-			color:$*gradient_step_six;
+			background:$*color_page_background;
+			border:1px solid $*color_page_border;
+			color:$*color_page_text;
 			font-family:$*font_entry_title;
 			font-size:$*font_base_size$*font_base_units;
 			font-style:italic;
 		}
 
 		#canvas input {
-			background:$*gradient_step_ten;
-			border:1px solid $*gradient_step_thirteen;
-			color:$*gradient_step_six;
+			background:$*color_page_background;
+			border:1px solid $*color_page_border;
+			color:$*color_page_text;
 			font-family:$*font_entry_title;
 			font-size:$*font_base_size$*font_base_units;
 			font-style:italic;
 		}
 
 		#canvas textarea {
-			background:$*gradient_step_ten;
-			border:1px solid $*gradient_step_thirteen;
-			color:$*gradient_step_six;
+			background:$*color_page_background;
+			border:1px solid $*color_page_border;
+			color:$*color_page_text;
 			font-family:$*font_entry_title;
 			font-size:$*font_base_size$*font_base_units;
 		}
@@ -478,7 +479,7 @@ function Page::print_default_stylesheet() {
 		#canvas blockquote {
 			$userpic_background
 			background-position: -5em -5em;
-			background-color: $*gradient_step_ten;
+			background-color: $*color_module_background;
 			display:inline-block;
 			font-family:$*font_serif;
 			font-style:italic;
@@ -563,17 +564,6 @@ function Page::print_default_stylesheet() {
 
 		#footer a {
 			font-weight:700;
-			text-decoration:none;
-		}
-
-		#footer a:visited {
-			font-weight:700;
-			text-decoration:none;
-		}
-
-		#footer a:active {
-			font-weight:700;
-			text-decoration:none;
 		}
 
 		#primary {
@@ -584,7 +574,7 @@ function Page::print_default_stylesheet() {
 		}
 
 		#primary > .inner:first-child {
-			background-color:$*gradient_step_ten;
+			background-color:$*color_module_background;
 			margin-right:5em;
 			padding:1em 1em 2em;
 		}
@@ -622,22 +612,6 @@ function Page::print_default_stylesheet() {
 			display:none;
 		}
 
-		.navigation a {
-			text-decoration:none;
-		}
-
-		.navigation a:visited {
-			text-decoration:none;
-		}
-
-		.navigation a:hover {
-			text-decoration:none;
-		}
-
-		.navigation a:active {
-			text-decoration:none;
-		}
-
 		/*-----------------------
 		  Entries & Comments
 		  -----------------------*/
@@ -659,7 +633,7 @@ function Page::print_default_stylesheet() {
 			position:relative;
 			z-index:0;
 			$entry_background
-			$entry_colors
+			color: $*color_entry_text;
 			-ms-word-break: break-all;
 			word-break: break-all;
 			word-break: break-word;
@@ -679,22 +653,6 @@ function Page::print_default_stylesheet() {
 			$entry_title_colors
 			font-style: italic;
 			font-weight: 400;
-		}
-
-		.entry-title a {
-			text-decoration:none;
-		}
-
-		.entry-title a:visited {
-			text-decoration:none;
-		}
-
-		.entry-title a:active {
-			text-decoration:none;
-		}
-
-		.entry-title a:hover {
-			text-decoration:none;
 		}
 
 		.datetime {
@@ -722,14 +680,15 @@ function Page::print_default_stylesheet() {
 		}
 
 		.entry-poster {
-			color:$*gradient_step_seven;
+			color:$*color_entry_text;
 			float:left;
 			font-family:$*font_base;
 			font-size:.8em;
 			font-style:italic;
-			margin-bottom:.8em;
+			margin: -1.5em 0 .8em -1.5em;
+			/*margin-bottom:.8em;
 			margin-left:-1.5em;
-			margin-top:-1.5em;
+			margin-top:-1.5em;*/
 			padding:0 1em;
 			text-transform:uppercase;
 			width:100%;
@@ -740,8 +699,7 @@ function Page::print_default_stylesheet() {
 		}
 
 		.entry-poster a b {
-			color:$*gradient_step_four;
-			font-family:$*font_base;
+			color: $*color_entry_link;
 		}
 
 		.entry-poster img {
@@ -769,11 +727,11 @@ function Page::print_default_stylesheet() {
 		}
 
 		.entry-wrapper .userpic {
-			background: $*gradient_step_thirteen;
+			background: $*color_userpic_background;
 			float: right;
 			padding: 1em;
 			position: relative;
-			margin: -2.65em -8.5em 0 0;
+			margin: -2.6em -8.5em 0 0;
 		}
 
 		.entry-wrapper .userpic img {
@@ -799,15 +757,15 @@ function Page::print_default_stylesheet() {
 			text-transform:lowercase;
 		}
 
-		.metadata ul {
-			border-top:1px solid $*gradient_step_ten;
+		#primary .metadata ul {
+			border-top:1px solid $*color_entry_border;
 			margin:0;
 			padding:0;
 		}
 
-		.metadata li {
+		#primary .metadata li {
 			list-style: none;
-			border-bottom:1px solid $*gradient_step_ten;
+			border-bottom:1px solid $*color_entry_border;
 			min-height:2em;
 			padding-top:.3em;
 		}
@@ -822,34 +780,6 @@ function Page::print_default_stylesheet() {
 
 		.metadata-item-xpost {
 			word-wrap: break-word;
-		}
-
-		.metadata li + li + li {
-			border-bottom:1px solid $*gradient_step_ten;
-		}
-
-		.metadata li + li {
-			border-bottom:1px solid $*gradient_step_ten;
-		}
-
-		.metadata li + li + li + li {
-			border-bottom:1px solid $*gradient_step_ten;
-		}
-
-		.metadata-item a {
-			text-decoration:none;
-		}
-
-		.metadata-item a:visited {
-			text-decoration:none;
-		}
-
-		.metadata-item a:active {
-			text-decoration:none;
-		}
-
-		.metadata-item a:hover {
-			text-decoration:none;
 		}
 
 		.metadata-label-mood {
@@ -886,50 +816,26 @@ function Page::print_default_stylesheet() {
 			display:none;
 		}
 
-		.tag a {
-			text-decoration:none;
-		}
-
 		.bottomcomment {
 			margin-left:1em;
 		}
 
-		.entry-interaction-links a {
-			background-color:$*gradient_step_ten;
-			border:5px solid;
-			border-color:$*gradient_step_ten;
-			font-family:$*font_base;
-			font-size:1.1em;
-			font-weight:700;
-			line-height:2em;
-			padding:2px 5px;
-			text-decoration:none;
-			text-transform:uppercase;
-		}
-
-		.entry-interaction-links a:hover {
-			background-color:$*gradient_step_fifteen;
-			border-color:$*gradient_step_fifteen;
-			color:$*gradient_step_one;
-		}
-
+		.entry-interaction-links a,
 		.comment-interaction-links a {
-			background-color:$*gradient_step_ten;
-			border:5px solid;
-			border-color:$*gradient_step_ten;
+			background-color:$*color_entry_link;
+			border:5px solid $*color_entry_link;
 			font-family:$*font_base;
 			font-size:$*font_base_size$*font_base_units;
 			font-weight:700;
 			line-height:2em;
 			padding:2px 5px;
-			text-decoration:none;
 			text-transform:uppercase;
 		}
 
+		.entry-interaction-links a:hover,
 		.comment-interaction-links a:hover {
-			background-color:$*gradient_step_fifteen;
-			border-color:$*gradient_step_fifteen;
-			color:$*gradient_step_one;
+			background-color:$*color_entry_link_hover;
+			border-color:$*color_entry_link_hover;
 		}
 
 		.above-entry-interaction-links,
@@ -940,7 +846,7 @@ function Page::print_default_stylesheet() {
 		.comment-wrapper {
 			border:1px solid;
 			$entry_background
-			border-color:$*gradient_step_twelve;
+			border-color:$*color_module_border;
 			margin:0 .5em;
 			padding:1em;
 		}
@@ -953,16 +859,11 @@ function Page::print_default_stylesheet() {
 		}
 
 		.comment-poster {
-			color:$*gradient_step_seven;
+			color:$*color_entry_text;
 			font-family:$*font_base;
 			font-size:.8em;
 			font-style:italic;
 			text-transform:uppercase;
-		}
-
-		.comment-poster a {
-			color:$*gradient_step_four;
-			text-decoration:none;
 		}
 
 		.comment-poster img {
@@ -1008,10 +909,7 @@ function Page::print_default_stylesheet() {
 			padding-bottom:-3.5em;
 		}
 
-		.page-entry #primary .inner .comment-wrapper .userpic {
-			margin-top:0;
-		}
-
+		.page-entry #primary .inner .comment-wrapper .userpic,
 		.page-reply #primary .inner .comment-wrapper .userpic {
 			margin-top:0;
 		}
@@ -1026,7 +924,7 @@ function Page::print_default_stylesheet() {
 
 		#secondary {
 			background-color:none;
-			color:$*gradient_step_two;
+			color:$*color_module_text;
 			float:left;
 			margin-left:-25em;
 			margin-top:-10em;
@@ -1040,8 +938,8 @@ function Page::print_default_stylesheet() {
 		}
 
 		#secondary h2 {
-			background:$*gradient_step_thirteen;
-			color: $*color_accent_two;
+			background:$*color_module_title_background;
+			color: $*color_module_title;
 			font-family:$*font_serif;
 			font-size:1.6em;
 			font-style:italic;
@@ -1051,8 +949,33 @@ function Page::print_default_stylesheet() {
 			text-transform:lowercase;
 		}
 
-		#secondary h2 a {
-			color: $*color_accent_two;
+		#secondary h2 a,
+		#secondary h2 a:visited {
+			color: $*color_module_title;
+		}
+
+		#secondary h2 a:active {
+			color: $*color_module_link_active;
+		}
+
+		#secondary h2 a:hover {
+			color: $*color_module_link_hover;
+		}
+
+		#secondary a {
+			color: $*color_module_link;
+		}
+
+		#secondary a:visited {
+			color: $*color_module_link_visited;
+		}
+
+		#secondary a:active {
+			color: $*color_module_link_active;
+		}
+
+		#secondary a:hover {
+			color: $*color_module_link_hover;
 		}
 
 		#secondary .module-wrapper {
@@ -1062,7 +985,7 @@ function Page::print_default_stylesheet() {
 		}
 
 		#secondary .module-content {
-			$module_colors
+			background-color: $*color_sidebar_background;
 			padding:.4em;
 		}
 
@@ -1070,7 +993,6 @@ function Page::print_default_stylesheet() {
 		  User Profile Module
 		  -----------------------*/
 		.module-userprofile .userpic img {
-			/*background:#eee url($*image_background_userpic_url) repeat 0 0;*/
 			$userpic_background;
 			border:0;
 			display: block;
@@ -1080,10 +1002,7 @@ function Page::print_default_stylesheet() {
 			height: 6.25rem;
 		}
 
-		.module-userprofile .journal-name {
-			display:none;
-		}
-
+		.module-userprofile .journal-name,
 		.module-userprofile .journal-website-name {
 			display:none;
 		}
@@ -1113,22 +1032,25 @@ function Page::print_default_stylesheet() {
 			text-align:center;
 		}
 
-		.module-calendar .module-content .entry-day {
-			background-color:$*gradient_step_six;
+		#secondary .module-calendar .module-content .entry-day {
+			background-color:$*color_page_border;
 			border:1px solid;
-			border-color:$*gradient_step_seven;
-			color:$*gradient_step_fifteen;
+			border-color:$*color_page_border;
 		}
 
-		.module-calendar .module-content .entry-day a {
-			color:$*gradient_step_fifteen;
+		#secondary .module-calendar .module-content .entry-day:hover {
+			background-color:$*color_page_background;
 		}
 
-		.module-calendar .module-content .empty-day {
-			background-color:$*gradient_step_eight;
+		#secondary .module-calendar .module-content .entry-day:hover a {
+			color:$*color_page_link_hover;
+		}
+
+		#secondary .module-calendar .module-content .empty-day {
+			background-color:$*color_module_background;
 			border:1px solid;
-			border-color:$*gradient_step_nine;
-			color:$*gradient_step_fifteen;
+			border-color:$*color_module_border;
+			color:$*color_module_text;
 		}
 		/*-----------------------
 		  Page Summary Module
@@ -1142,9 +1064,9 @@ function Page::print_default_stylesheet() {
 		}
 
 		#tertiary .module-pagesummary .module-list-item {
-			background-color:$*gradient_step_ten;
+			background-color:$*color_module_background;
 			border:1px solid;
-			border-color:$*gradient_step_eleven;
+			border-color:$*color_module_border;
 			margin-bottom:.3em;
 			padding:2px;
 			text-align:center;
@@ -1154,8 +1076,8 @@ function Page::print_default_stylesheet() {
 		  Second Sidebar (Near left)
 		  -----------------------*/
 		#tertiary {
-			background-color:$*gradient_step_ten;
-			color:$*gradient_step_two;
+			background-color:$*color_module_background;
+			color:$*color_entry_title;
 			float:left;
 			padding: 2.8em 0 0;
 			margin: 0 0 0 -12em;
@@ -1180,7 +1102,7 @@ function Page::print_default_stylesheet() {
 		#tertiary .module-content {
 			border:1px solid;
 			$entry_background
-			border-color:$*gradient_step_twelve;
+			border-color:$*color_module_border;
 			margin:.3em 0;
 			padding:.5em;
 		}
@@ -1189,7 +1111,7 @@ function Page::print_default_stylesheet() {
 			font-family:$*font_base;
 			font-size: .8em;
 			font-weight:700;
-			margin: -.5em 0 0;
+			margin: -.35em 0 0;
 			position: absolute;
 			text-transform:uppercase;
 			width:100%;
@@ -1209,16 +1131,12 @@ function Page::print_default_stylesheet() {
 		}
 
 		#header .module-navlinks li a {
-			background-color:$*gradient_step_fifteen;
+			background-color:$*color_header_link;
 			padding:1em;
 		}
 
 		#header .module-navlinks li a:hover {
-			$module_colors
-		}
-
-		#tertiary .module-tags_multilevel a {
-			text-decoration:none;
+			background-color: $*color_header_link_hover;
 		}
 
 		#tertiary .module-tags_multilevel li:hover,
@@ -1228,7 +1146,7 @@ function Page::print_default_stylesheet() {
 
 		#tertiary .module-tags_multilevel li li:hover,
 		#tertiary .module-tags_multilevel li li li li:hover {
-			$module_colors
+			background-color: $*color_module_background;
 		}
 
 		#tertiary .module-tags_multilevel .module-list-item li li li {
@@ -1239,7 +1157,7 @@ function Page::print_default_stylesheet() {
 		#tertiary .module-tags_multilevel .module-list-item {
 			border:1px solid;
 			$entry_background
-			border-color:$*gradient_step_twelve;
+			border-color:$*color_module_border;
 			margin:.3em 0;
 			padding:.5em;
 		}
@@ -1262,6 +1180,7 @@ function Page::print_default_stylesheet() {
 			letter-spacing:-.1em;
 			text-align:right;
 			text-transform:lowercase;
+			color: $*color_entry_text;
 		}
 
 		.page-archive .contents .inner caption {
@@ -1278,13 +1197,12 @@ function Page::print_default_stylesheet() {
 			width:100%;
 		}
 
-		.page-archive .month tr {
-			border:1px solid;
-			border-color:$*gradient_step_fifteen;
+		.page-archive .month th {
+			color: $*color_entry_text;
 		}
-
 		.page-archive .month td.day {
-			$module_colors
+			background-color: $*color_entry_background;
+			color: $*color_entry_text;
 			line-height:3.5em;
 			margin-bottom:10px;
 			padding:.3em;
@@ -1305,10 +1223,9 @@ function Page::print_default_stylesheet() {
 		}
 
 		#archive-month .navigation input {
-			$module_colors
+			background-color: $*color_module_background;
 			border:1px solid;
-			border-color:$*gradient_step_fourteen;
-			color:$*gradient_step_one;
+			border-color:$*color_module_border;
 			font-family:$*font_base;
 			font-size:.9em;
 		}
@@ -1318,17 +1235,15 @@ function Page::print_default_stylesheet() {
 		}
 
 		#archive-month .navigation select {
-			$module_colors
+			background-color: $*color_module_background;
 			border:1px solid;
-			border-color:$*gradient_step_fourteen;
-			color:$*gradient_step_one;
+			border-color:$*color_module_border;
 			font-family:$*font_base;
 			font-size:.9em;
 		}
 
 		#archive-month .navigation option {
-			$module_colors
-			color:$*gradient_step_one;
+			background-color: $*color_module_background;
 			font-family:$*font_base;
 			font-size:.9em;
 		}
@@ -1380,12 +1295,12 @@ function Page::print_default_stylesheet() {
 		}
 
 		#archive-month .datetime {
-			color:$*gradient_step_six;
+			color:$*color_page_text;
 			float:left;
 		}
 
 		#archive-month dd {
-			background:$*gradient_step_twelve;
+			background:$*color_entry_background;
 			margin:-2.5em 0 1em 1em;
 			padding:4.5em 1em 1em;
 		}
